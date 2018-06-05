@@ -1,5 +1,7 @@
 {
   "name": "esport_project_thp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "mimelib": "^0.3.1"
+  }
 }
