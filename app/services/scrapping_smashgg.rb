@@ -22,7 +22,7 @@ end
 
 # First URL to get all events
 def first_url(game)
-  url = 'https://smash.gg/tournaments?filter=' + game
+  'https://smash.gg/tournaments?filter=' + game
 end
 
 # Get the number of event
@@ -32,7 +32,7 @@ def nb_of_event(browser, url)
   table_of_item = item.split('').reverse_each.take_while do |letter|
     letter != ' '
   end
-  nb_item = table_of_item.reverse.join('')
+  table_of_item.reverse.join('')
 end
 
 # Create my url
@@ -43,7 +43,7 @@ def my_url(nb_of_event, page)
   game = 'street fighter'
   style = 'combat'
   my_page = '&page=' + page
-  url = url_first_part + nb_per_page + url_second_part + game + my_page
+  url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
 # Spreadsheet
@@ -91,7 +91,7 @@ def scrap(url, browser, game, style, nb_of_event)
       title = browser.divs(class: 'TournamentCardHeading__title')
       sleep(1)
     end
-  elsif @nb_event_integer < 0
+  elsif @nb_event_integer.negative?
     while title.length != @nb_event_integer + 100
       title = browser.divs(class: 'TournamentCardHeading__title')
       sleep(1)
@@ -122,7 +122,7 @@ def scrap(url, browser, game, style, nb_of_event)
         my_text = divbis.a.text.split('').take_while do |text|
           text != ' '
         end
-        my_nb = my_text.join('')
+        my_text.join('')
       end
     end
     if my_result[0].nil?
@@ -165,7 +165,7 @@ my_nb_event = nb_of_event(browser, first_url(my_game))
 
 my_my_page = 0
 
-while @nb_event_integer > 0
+while @nb_event_integer.positive?
 
   my_nb_event = '100'
   my_my_page += 1
