@@ -155,6 +155,7 @@ my_nb_event = nb_of_event(browser, first_url(my_game))
 nb_event_integer = my_nb_event.to_i
 if nb_event_integer > 100
   my_nb_event = '100'
+  p 'path origin'
 end
 my_my_page = 1
 
@@ -169,12 +170,15 @@ while nb_event_integer > 0
   style = 'combat'
   scrap(url, browser, game, style)
 
-  if nb_event_integer > 100 
+  if nb_event_integer >= 100 
     my_nb_event = '100'
     nb_event_integer -= 100
+    p 'path1'
   else
     my_nb_event = nb_event_integer.to_s
     nb_event_integer = 0
+    p 'path2'
   end
   my_my_page += 1
 end
+p 'path3'
