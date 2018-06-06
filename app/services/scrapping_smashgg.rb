@@ -3,6 +3,7 @@
 require 'watir'
 require 'open-uri'
 require 'google_drive'
+require 'byebug'
 
 # Scraping data on smash GG for : Tournament
 # Datas : Tournament : Name - Date - Image - place - nb of attendees - style - game
@@ -41,11 +42,7 @@ def my_url(nb_of_event, page)
   url_second_part = '&filter='
   game = 'street fighter'
   style = 'combat'
-  if page.to_i > 1
-    my_page = '&page=' + page
-  else
-    my_page = page
-  end
+  my_page = '&page=' + page
   url = url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
@@ -72,11 +69,11 @@ def save_data_on_spreadsheet(title, img, date, attend, place, game, style)
   end
   ws.save
   ws.reload
-  @my_data = title.length + 2
+  @my_data += title.length
 end
 
 # Scrap the infos
-def scrap(url, browser, game, style)
+def scrap(url, browser, game, style, nb_of_event)
   tr_img = []
   tr_title = []
   tr_date = []
@@ -84,13 +81,17 @@ def scrap(url, browser, game, style)
   tr_place = []
   tr_style = []
   tr_game = []
+  title = ''
 
   browser.goto url
+
   # Get the datas
-  img = browser.divs(class: ['TournamentCardIcon', 'undefined'])
-  title = browser.divs(class: 'TournamentCardHeading__title')
-  date = browser.divs(class: 'TournamentCardHeading__information')
-  attend_place = browser.divs(class: 'TournamentCardContainer')
+  while title.length != nb_of_event
+    img = browser.divs(class: ['TournamentCardIcon', 'undefined'])
+    title = browser.divs(class: 'TournamentCardHeading__title')
+    date = browser.divs(class: 'TournamentCardHeading__information')
+    attend_place = browser.divs(class: 'TournamentCardContainer')
+  end
 
   # Save in 3 differents tables
   img.each do |div|
@@ -145,40 +146,44 @@ def scrap(url, browser, game, style)
   end
 
   save_data_on_spreadsheet(tr_title, tr_img, tr_date, tr_attend, tr_place, tr_game, tr_style)
-
 end
 
 # Create main function
 browser = Watir::Browser.new :firefox
 
+# if nb_event <= 100 => my_nb_event = nb_event.to_s
+# Si le nbre d'event est moins ou égal a 100
+# Le nbre d'event = au nbre d'event
+# if nb_event > 100 => nb_event = 100 et nb_event -= 100
+# Si le nbre d'event est plus de 100
+# Le nbre d'event = 100 et on baisse le nbre total d'event de 100
+
 my_nb_event = nb_of_event(browser, first_url(my_game))
 nb_event_integer = my_nb_event.to_i
-if nb_event_integer > 100
-  my_nb_event = '100'
-  p 'path origin'
-end
-my_my_page = 1
+
+my_my_page = 0
 
 while nb_event_integer > 0
-  
-  p nb_event_integer
-  p my_nb_event
-  p my_my_page
+
+  # if nb_event_integer <= 100 
+  #   my_nb_event = nb_event_integer.to_s
+  #   # p 'path1'
+  # elsif nb_event_integer > 100
+  #   my_nb_event = '100'
+  #   # p 'path2'
+  # end
+  my_nb_event = '100'
+  my_my_page += 1
+  nb_event_integer -= 100
+
+  # p nb_event_integer
+  # p my_nb_event
+  # p my_my_page
 
   url = my_url(my_nb_event, my_my_page.to_s)
   game = 'street fighter'
   style = 'combat'
-  scrap(url, browser, game, style)
-
-  if nb_event_integer >= 100 
-    my_nb_event = '100'
-    nb_event_integer -= 100
-    p 'path1'
-  else
-    my_nb_event = nb_event_integer.to_s
-    nb_event_integer = 0
-    p 'path2'
-  end
-  my_my_page += 1
+  scrap(url, browser, game, style, my_nb_event.to_i)
+  # p url
 end
-p 'path3'
+# p 'path3'
