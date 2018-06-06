@@ -86,12 +86,21 @@ def scrap(url, browser, game, style, nb_of_event)
   browser.goto url
 
   # Get the datas
-  while title.length != nb_of_event
-    img = browser.divs(class: ['TournamentCardIcon', 'undefined'])
-    title = browser.divs(class: 'TournamentCardHeading__title')
-    date = browser.divs(class: 'TournamentCardHeading__information')
-    attend_place = browser.divs(class: 'TournamentCardContainer')
+  if @nb_event_integer >= 0
+    while title.length != nb_of_event
+      title = browser.divs(class: 'TournamentCardHeading__title')
+      sleep(1)
+    end
+  elsif @nb_event_integer < 0
+    while title.length != @nb_event_integer + 100
+      title = browser.divs(class: 'TournamentCardHeading__title')
+      sleep(1)
+    end
   end
+
+  img = browser.divs(class: ['TournamentCardIcon', 'undefined'])
+  date = browser.divs(class: 'TournamentCardHeading__information')
+  attend_place = browser.divs(class: 'TournamentCardContainer')
 
   # Save in 3 differents tables
   img.each do |div|
@@ -151,39 +160,20 @@ end
 # Create main function
 browser = Watir::Browser.new :firefox
 
-# if nb_event <= 100 => my_nb_event = nb_event.to_s
-# Si le nbre d'event est moins ou égal a 100
-# Le nbre d'event = au nbre d'event
-# if nb_event > 100 => nb_event = 100 et nb_event -= 100
-# Si le nbre d'event est plus de 100
-# Le nbre d'event = 100 et on baisse le nbre total d'event de 100
-
 my_nb_event = nb_of_event(browser, first_url(my_game))
-nb_event_integer = my_nb_event.to_i
+@nb_event_integer = my_nb_event.to_i
 
 my_my_page = 0
 
-while nb_event_integer > 0
+while @nb_event_integer > 0
 
-  # if nb_event_integer <= 100 
-  #   my_nb_event = nb_event_integer.to_s
-  #   # p 'path1'
-  # elsif nb_event_integer > 100
-  #   my_nb_event = '100'
-  #   # p 'path2'
-  # end
   my_nb_event = '100'
   my_my_page += 1
-  nb_event_integer -= 100
-
-  # p nb_event_integer
-  # p my_nb_event
-  # p my_my_page
+  @nb_event_integer -= 100
 
   url = my_url(my_nb_event, my_my_page.to_s)
   game = 'street fighter'
   style = 'combat'
   scrap(url, browser, game, style, my_nb_event.to_i)
-  # p url
+
 end
-# p 'path3'
