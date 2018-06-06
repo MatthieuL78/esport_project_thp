@@ -6,7 +6,8 @@ require 'google_drive'
 require 'byebug'
 
 # Scraping data on smash GG for : Tournament
-# Datas : Tournament : Name - Date - Image - place - nb of attendees - style - game
+# Datas : Tournament : Name - Date - Image - place - nb of attendees
+# Data fill manually : Style - Game
 # Choose your game : Tekken 7, Street fighter
 my_game = 'street fighter'
 @my_data = 2
@@ -15,7 +16,7 @@ my_game = 'street fighter'
 
 # Check if a string is an integer
 class String
-  def is_i?
+  def i?
     !!(self =~ /\A[-+]?[0-9]+\z/)
   end
 end
@@ -41,7 +42,6 @@ def my_url(nb_of_event, page)
   nb_per_page = nb_of_event
   url_second_part = '&filter='
   game = 'street fighter'
-  style = 'combat'
   my_page = '&page=' + page
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
@@ -75,10 +75,6 @@ end
 # Scrap the infos
 def scrap(url, browser, game, style, nb_of_event)
   tr_img = []
-  tr_title = []
-  tr_date = []
-  tr_attend = []
-  tr_place = []
   tr_style = []
   tr_game = []
   title = ''
@@ -117,7 +113,7 @@ def scrap(url, browser, game, style, nb_of_event)
 
   # To improve
   tr_attend = attend_place.map do |div|
-    my_result = div.divs(class: ['InfoList__title', 'InfoList__section']).map do |divbis|
+    my_result = div.divs(class: %w('InfoList__title' 'InfoList__section')).map do |divbis|
       if divbis.a.exists?
         my_text = divbis.a.text.split('').take_while do |text|
           text != ' '
@@ -134,8 +130,8 @@ def scrap(url, browser, game, style, nb_of_event)
 
   # To improve
   tr_place = attend_place.map do |div|
-    my_result = div.divs(class: ['InfoList__title', 'InfoList__section']).map do
-      if div.children[1].text[0].is_i? || div.children[1].text[0].nil?
+    my_result = div.divs(class: %w('InfoList__title' 'InfoList__section')).map do
+      if div.children[1].text[0].i? || div.children[1].text[0].nil?
         'ONLINE'
       else
         div.children[1].span.text
