@@ -7,7 +7,7 @@ require 'google_drive'
 # Scraping data on smash GG for : Tournament
 # Datas : Tournament : Name - Date - Image - place - nb of attendees - style - game
 # Choose your game : Tekken 7, Street fighter
-my_game = 'Tekken 7'
+my_game = 'street fighter'
 @my_data = 2
 
 # Make a table with all the game's name to scrap
@@ -150,13 +150,31 @@ end
 
 # Create main function
 browser = Watir::Browser.new :firefox
-# my_nb_event = nb_of_event(browser, first_url(my_game))
-url = my_url('100', '1')
-game = 'street fighter'
-style = 'combat'
-p @my_data
-scrap(url, browser, game, style)
 
-url = my_url('100', '2')
-p @my_data
-scrap(url, browser, game, style)
+my_nb_event = nb_of_event(browser, first_url(my_game))
+nb_event_integer = my_nb_event.to_i
+if nb_event_integer > 100
+  my_nb_event = '100'
+end
+my_my_page = 1
+
+while nb_event_integer > 0
+  
+  p nb_event_integer
+  p my_nb_event
+  p my_my_page
+
+  url = my_url(my_nb_event, my_my_page.to_s)
+  game = 'street fighter'
+  style = 'combat'
+  scrap(url, browser, game, style)
+
+  if nb_event_integer > 100 
+    my_nb_event = '100'
+    nb_event_integer -= 100
+  else
+    my_nb_event = nb_event_integer.to_s
+    nb_event_integer = 0
+  end
+  my_my_page += 1
+end
