@@ -57,7 +57,7 @@ def save_data_on_spreadsheet(title, img, date, attend, place, game, style)
   ws[1, 5] = 'Place'
   ws[1, 6] = 'Game'
   ws[1, 7] = 'Style'
-  
+
   (@my_data..@my_data + title.length).each_with_index do |row, index|
     ws[row, 1] = title[index]
     ws[row, 2] = img[index]
@@ -94,7 +94,7 @@ def scrap(url, browser, game, style, nb_of_event)
     end
   end
 
-  img = browser.divs(class: ['TournamentCardIcon', 'undefined'])
+  img = browser.divs(class: %w[TournamentCardIcon undefined])
   date = browser.divs(class: 'TournamentCardHeading__information')
   attend_place = browser.divs(class: 'TournamentCardContainer')
 
@@ -113,7 +113,7 @@ def scrap(url, browser, game, style, nb_of_event)
 
   # To improve
   tr_attend = attend_place.map do |div|
-    my_result = div.divs(class: %w('InfoList__title' 'InfoList__section')).map do |divbis|
+    my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do |divbis|
       if divbis.a.exists?
         my_text = divbis.a.text.split('').take_while do |text|
           text != ' '
@@ -130,7 +130,7 @@ def scrap(url, browser, game, style, nb_of_event)
 
   # To improve
   tr_place = attend_place.map do |div|
-    my_result = div.divs(class: %w('InfoList__title' 'InfoList__section')).map do
+    my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do
       if div.children[1].text[0].i? || div.children[1].text[0].nil?
         'ONLINE'
       else
