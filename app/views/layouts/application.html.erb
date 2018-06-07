@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EsportProjectThp</title>
+    <title>App THP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,400" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +12,13 @@
   </head>
 
   <body>
+    <!-- Header -->
+    <%= render 'layouts/layout/header' %>
+
     <%= yield %>
+
+    <!-- Footer -->
+    <script type="text/javascript"></script>
   </body>
+  <%= render 'layouts/layout/footer' %>
 </html>
