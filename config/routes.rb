@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   root 'home#index'
+  get 'rank/index', to: 'rank#index'
 
   mount ForestLiana::Engine => '/forest'
   devise_for :sponsors
