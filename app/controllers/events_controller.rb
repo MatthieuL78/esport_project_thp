@@ -69,6 +69,9 @@ class EventsController < ApplicationController
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
     2.upto(10) do |row|
+      # 
+      # Need to check on the database if the event already exist
+      #
       event = Event.new
       1.upto(7) do |col|
         case col
