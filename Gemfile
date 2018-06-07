@@ -50,9 +50,8 @@ gem 'dotenv-rails'
 
 # For scrapping
 gem 'watir'
-# gem 'open-uri'
 
-# For google-spreadsheet
+# For google spreadsheet
 gem 'google_drive'
 
 group :development, :test do
