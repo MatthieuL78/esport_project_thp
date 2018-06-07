@@ -11,7 +11,7 @@
   <div class="menudesk">
     <ul class="">
       <li><%= link_to "News", root_path, class: "news" %></li>
-      <li><%= link_to "Rank", root_path, class: "rank" %></li>
+      <li><%= link_to "Classement", classement_ranking_path, class: "rank" %></li>
       <li><%= link_to "Profil", root_path, class: "profil" %></li>
     </ul>
   </div>
@@ -30,10 +30,13 @@
     <ul class="menu-link">
       <li><%= link_to "Home", root_path, class: "news" %></li>
       <li><%= link_to "Profil", root_path %></li>
-      <li><%= link_to "Classement", rank_index_path %></li>
+      <li><%= link_to "Classement", classement_ranking_path %></li>
       <li><%= link_to "Partenaire", root_path %></li>
       <li><%= link_to "Logout", root_path %></li>
     </ul>
   </div>
 </div>
 </header>
+<div class="regule-header">
+
+</div>
