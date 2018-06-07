@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 0) do
-=======
 ActiveRecord::Schema.define(version: 2018_06_04_160116) do
 
   create_table "events", force: :cascade do |t|
@@ -131,6 +128,5 @@ ActiveRecord::Schema.define(version: 2018_06_04_160116) do
     t.index ["email"], name: "index_sponsors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_sponsors_on_reset_password_token", unique: true
   end
->>>>>>> 0fedf36c7c2924803af2eaa21f2df8407d0c4c70
 
 end
