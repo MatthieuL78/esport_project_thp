@@ -3,7 +3,7 @@
 require 'google_drive'
 
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: %I[show edit update destroy]
 
   # GET /events
   # GET /events.json
@@ -13,8 +13,7 @@ class EventsController < ApplicationController
 
   # GET /events/1
   # GET /events/1.json
-  def show
-  end
+  def show; end
 
   # GET /events/new
   def new
@@ -22,8 +21,7 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /events
   # POST /events.json
@@ -65,41 +63,45 @@ class EventsController < ApplicationController
     end
   end
 
-  def get_data_from_spreadsheet
+  def data_create; end
+
+  def save_data_from_spreadsheet
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
-    10.times do |row|
+    2.upto(10) do |row|
       event = Event.new
-      7.times do |col|
+      1.upto(7) do |col|
         case col
         when 1
-          event.name = ws[row,col]
+          event.name = ws[row, col]
         when 2
-          event.image = ws[row,col]
+          event.image = ws[row, col]
         when 3
-          event.date = ws[row,col]
+          event.date = ws[row, col]
         when 4
-          event.attendee = ws[row,col]
+          event.attendee = ws[row, col]
         when 5
-          event.place = ws[row,col]
+          event.place = ws[row, col]
         when 6
-          event.game = ws[row,col]
+          event.game = ws[row, col]
         else
-          event.combat = ws[row,col]
+          event.style = ws[row, col]
         end
       end
       event.save
     end
+    redirect_to events_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.fetch(:event, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.fetch(:event, {})
+  end
 end
