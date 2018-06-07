@@ -2,7 +2,6 @@
 
 require 'watir'
 require 'google_drive'
-require 'byebug'
 
 # Scraping data on smash GG for : Tournament
 # Datas : Tournament : Name - Date - Image - place - nb of attendees

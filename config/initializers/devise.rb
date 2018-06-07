@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'dotenv-rails'
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -11,7 +13,9 @@ Devise.setup do |config|
   # config.secret_key = '64c852c0dc2effca5bb406f6eafe7f2afa3bca559e197d03e80cac1553a181885c261a4f22c531aec249ba955a1eba09bda4bdcc147b50f3455db6b0b316c0a3'
 
 #key ajouté par geraldy
-  config.secret_key = '92c64034d28af0b031bad1a9d2b095a61691e8f4d271af0e8dfce44753336d30a81846c1c44b0074ae49c54ace2e0fda106e102c1ab464a27efe678fa013ec38'
+
+  config.secret_key = '0a8cb357aaee573a4d391e312b72140e4b37e170902cb009cf2e6727209452bd0d0a74d4c0ed2182be890f6a759c92b129d95bc41b28212a7b5bc7b9e981b107'
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -282,4 +286,5 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
 end
