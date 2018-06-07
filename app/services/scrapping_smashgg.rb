@@ -46,7 +46,7 @@ def my_url(nb_of_event, page)
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
-# Spreadsheet
+# Create a Spreadsheet on google drive
 def save_data_on_spreadsheet(title, img, date, attend, place, game, style)
   session = GoogleDrive::Session.from_config('config.json')
   ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
@@ -94,6 +94,7 @@ def scrap(url, browser, game, style, nb_of_event)
     end
   end
 
+  # I don't create a function if the call is one line
   img = browser.divs(class: %w[TournamentCardIcon undefined])
   date = browser.divs(class: 'TournamentCardHeading__information')
   attend_place = browser.divs(class: 'TournamentCardContainer')
@@ -107,9 +108,9 @@ def scrap(url, browser, game, style, nb_of_event)
     end
   end
 
-  tr_title = title.map { |div| div.text }
+  tr_title = title.map(&:text)
 
-  tr_date = date.map { |div| div.text }
+  tr_date = date.map(&:text)
 
   # To improve
   tr_attend = attend_place.map do |div|
@@ -145,7 +146,7 @@ def scrap(url, browser, game, style, nb_of_event)
   end
 
   # Put this in an other function
-  img.each do
+  title.length.times do
     tr_game << game.capitalize
     tr_style << style.capitalize
   end
