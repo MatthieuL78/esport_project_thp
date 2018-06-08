@@ -1,8 +1,7 @@
 <header class="main-header">
 <nav>
   <div class="logo">
-    <img src="https://media.eventhubs.com/static/images/eventhubslogo1.png" alt="logo">
-  </div>
+    <%= image_tag("https://media.eventhubs.com/static/images/eventhubslogo1.png") %>  </div>
   <div class="search">
     <form id="demo-2">
 	    <input type="search" placeholder="Search">
@@ -10,9 +9,15 @@
   </div>
   <div class="menudesk">
     <ul class="">
-      <li><%= link_to "News", root_path, class: "news" %></li>
+      <li><%= link_to "Actualité", root_path, class: "news" %></li>
       <li><%= link_to "Classement", classement_ranking_path, class: "rank" %></li>
+      <% if player_signed_in? || sponsor_signed_in? %>
+      <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
       <li><%= link_to "Profil", root_path, class: "profil" %></li>
+      <li><%= link_to "Sign Out", root_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to "Connexion", root_path, class: "connexion" %></li>
+      <% end %>
     </ul>
   </div>
   <div id="nav-toggle">
@@ -28,15 +33,17 @@
       </div>
     </div>
     <ul class="menu-link">
-      <li><%= link_to "Home", root_path, class: "news" %></li>
-      <li><%= link_to "Profil", root_path %></li>
+      <li><%= link_to "Actu", root_path, class: "news" %></li>
       <li><%= link_to "Classement", classement_ranking_path %></li>
-      <li><%= link_to "Partenaire", root_path %></li>
+      <li><%= link_to "Profil", root_path %></li>
+      <% if player_signed_in? || sponsor_signed_in? %>
+
+      <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
       <li><%= link_to "Logout", root_path %></li>
+      <% else %>
+      <li><%= link_to "Connexion", new_player_session_path %></li>
+      <% end %>
     </ul>
   </div>
 </div>
 </header>
-<div class="regule-header">
-
-</div>
