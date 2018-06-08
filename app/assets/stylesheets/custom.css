@@ -12,11 +12,15 @@ dark grey rgba(90,90,90,1);
  }
  html,body{
    font-family: 'Oswald', sans-serif;
-
  }
 .fixed{
   position: fixed;
 }
+.main-header{
+  position: relative;
+  width: 100%;
+}
+
  nav{
    background-color: rgba(31, 31, 81,1);
    padding: 10px;
@@ -87,8 +91,8 @@ input::-webkit-search-cancel-button {
 	display: none;
 }
 input[type=search] {
-	background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
-	border: solid 1px #ccc;
+	background: #ddd url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+	border: solid 1px #BBB;
 	padding: 9px 10px 9px 32px;
 	width: 55px;
 
@@ -145,14 +149,14 @@ input::-webkit-input-placeholder {
  .menudesk li a:hover{
    background-color: transparent;
  }
- #filter{
+ /* #filter{
    background-color: rgba(31, 31, 81,.9);
    display: flex;
    color: rgba(251, 251, 251,1);
    position: fixed;
    width: 100%;
    z-index: 2;
- }
+ } */
  .next{
    background-color: rgba(220,220,220,1);
    z-index: 1;
@@ -348,23 +352,31 @@ footer p{
   opacity: 0;
  }
 
-
  /* home pages */
+
  .section{
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-top:50px;
+  margin-bottom:30px;
+  flex-wrap: wrap;
  }
- .section-top{
-   margin-top:50px;
- }
+
  .section .article img{
   width: 100%;
  }
  .section .article{
-  width: 90%;
+  width: 100%;
   border: 1px solid #EEE;
   margin: 10px auto 0 auto;
+
+ }
+ .section .article p{
+   font-weight: lighter;
+ }
+ .section .article span{
+   text-decoration: underline;
  }
  @media (min-width: 725px) {
   .section{
@@ -378,3 +390,54 @@ footer p{
     margin: 10px auto 0 auto;
   }
  }
+/* partenaire */
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ADA996;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.partenaire{
+  display: flex;
+  margin: 5px;
+}
+.partenaire-inner{
+  border
+  width: 100%;
+  padding: 10px;
+  background: #EEE;
+}
+.partenaire-inner img{
+  width: 100%;
+}
+.partenaire-info{
+  display: flex;
+}
+.partenaire-info h3{
+  flex: 1;
+}
+.social li{
+  display: inline;
+}
+.partenaire-contact .social img{
+  width: 30px;
+}
+@media (min-width: 725px) {
+  .regule-header{
+    display: block;
+    width: 100%;
+  }
+  .content{
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-around;
+  }
+ .partenaire{
+   flex-basis:40%;
+ }
+ footer{
+   position:inherit;
+ }
+}
