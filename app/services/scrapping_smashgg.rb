@@ -3,15 +3,6 @@
 require 'watir'
 require 'google_drive'
 
-# Scraping data on smash GG for : Tournament
-# Datas : Tournament : Name - Date - Image - place - nb of attendees
-# Data fill manually : Style - Game
-# Choose your game : Tekken 7, Street fighter
-my_game = 'street fighter'
-@my_data = 2
-
-# Make a table with all the game's name to scrap
-
 # Check if a string is an integer
 class String
   def i?
@@ -152,24 +143,32 @@ def scrap(url, browser, game, style, nb_of_event)
   save_data_on_spreadsheet(tr_title, tr_img, tr_date, tr_attend, tr_place, tr_game, tr_style)
 end
 
-# To call for the scrapping
-# Create main function
-# browser = Watir::Browser.new :firefox
+# Scraping data on smash GG for : Tournament
+# Datas : Tournament : Name - Date - Image - place - nb of attendees
+# Data fill manually : Style - Game
+# Choose your game : Tekken 7, Street fighter
 
-# my_nb_event = nb_of_event(browser, first_url(my_game))
-# @nb_event_integer = my_nb_event.to_i
+# Make a table with all the game's name to scrap
 
-# my_my_page = 0
+def main
+  # Add the following information :
+  my_game = 'street fighter'
+  style = 'combat'
+  # End
 
-# while @nb_event_integer.positive?
+  @my_data = 2
+  my_page = 0
 
-#   my_nb_event = '100'
-#   my_my_page += 1
-#   @nb_event_integer -= 100
+  browser = Watir::Browser.new :firefox
 
-#   url = my_url(my_nb_event, my_my_page.to_s)
-#   game = 'street fighter'
-#   style = 'combat'
-#   scrap(url, browser, game, style, my_nb_event.to_i)
+  my_nb_event = nb_of_event(browser, first_url(my_game))
+  @nb_event_integer = my_nb_event.to_i
 
-# end
+  while @nb_event_integer.positive?
+    my_nb_event = '100'
+    my_page += 1
+    @nb_event_integer -= 100
+    url = my_url(my_nb_event, my_my_page.to_s)
+    scrap(url, browser, game, style, my_nb_event.to_i)
+  end
+end
