@@ -33,8 +33,7 @@
         <img src="https://www.les-transferts.com/wp-content/uploads/2018/05/52a1abaa-5538-4590-b365-c840a82a2402.jpg" alt="">
         <p>Gamer: <%= current_player.email %></p>
       <% elsif sponsor_signed_in? %>
-      <img src="https://www.les-transferts.com/wp-content/uploads/2018/05/52a1abaa-5538-4590-b365-c840a82a2402.jpg" alt="">
-
+        <%= image_tag (current_sponsor.avatar.thumb.url) %>
         <p>Sponsor: <%= current_sponsor.email %></p>
       <% else %>
         <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/user-512.png" alt="">

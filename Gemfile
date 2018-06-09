@@ -3,9 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem 'refile', github: 'refile/refile', require: 'refile/rails'
-gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
-gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
