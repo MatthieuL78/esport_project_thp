@@ -16,14 +16,10 @@ def my_url(country, game)
 end
 
 def init_spreadsheet
-  ws[1, 1] = 'Rank country'
-  ws[1, 2] = 'Rank international'
-  ws[1, 3] = 'Name'
-  ws[1, 4] = 'Team'
-  ws[1, 5] = 'Character'
-  ws[1, 6] = 'Actual score'
-  ws[1, 7] = 'Number of tournament'
-  ws[1, 8] = 'Country'
+  session = GoogleDrive::Session.from_config('config.json')
+  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
+  title = ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country']
+  title.each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
 end
 
@@ -31,14 +27,9 @@ end
 def data_to_excel(player_hash)
   ws = init_spreadsheet
   (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
-    ws[row, 1] = player_hash['tr_index_country'][index]
-    ws[row, 2] = player_hash['tr_index_inter'][index]
-    ws[row, 3] = player_hash['tr_name'][index]
-    ws[row, 4] = player_hash['tr_team'][index]
-    ws[row, 5] = player_hash['tr_character'][index]
-    ws[row, 6] = player_hash['tr_actual_score'][index]
-    ws[row, 7] = player_hash['tr_tournament'][index]
-    ws[row, 8] = player_hash['tr_country'][index]
+    8.times do |i|
+      ws[row, i + 1] = player_hash[player_hash.keys[i]][index]
+    end
   end
   save_excel(ws)
 end
