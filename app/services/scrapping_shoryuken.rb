@@ -32,14 +32,9 @@ end
 def data_to_excel(player_hash)
   ws = init_spreadsheet
   (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
-    ws[row, 1] = player_hash['tr_index_country'][index]
-    ws[row, 2] = player_hash['tr_index_inter'][index]
-    ws[row, 3] = player_hash['tr_name'][index]
-    ws[row, 4] = player_hash['tr_team'][index]
-    ws[row, 5] = player_hash['tr_character'][index]
-    ws[row, 6] = player_hash['tr_actual_score'][index]
-    ws[row, 7] = player_hash['tr_tournament'][index]
-    ws[row, 8] = player_hash['tr_country'][index]
+    8.times do |i|
+      ws[row, i + 1] = player_hash[player_hash.keys[i]][index]
+    end
   end
   save_excel(ws)
 end
