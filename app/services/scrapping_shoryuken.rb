@@ -18,14 +18,8 @@ end
 def init_spreadsheet
   session = GoogleDrive::Session.from_config('config.json')
   ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
-  ws[1, 1] = 'Rank country'
-  ws[1, 2] = 'Rank international'
-  ws[1, 3] = 'Name'
-  ws[1, 4] = 'Team'
-  ws[1, 5] = 'Character'
-  ws[1, 6] = 'Actual score'
-  ws[1, 7] = 'Number of tournament'
-  ws[1, 8] = 'Country'
+  title = ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country']
+  title.each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
 end
 
