@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'rank/index', to: 'rank#index'
 
   get 'classement/ranking', to: 'classement#ranking'
+  get 'classement/fullranking', to: 'classement#fullranking'
+
   get 'partenaire/sponsor', to: 'partenaire#sponsor', as: 'sponsor'
 
   mount ForestLiana::Engine => '/forest'
