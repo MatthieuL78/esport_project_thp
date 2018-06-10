@@ -15,8 +15,7 @@ def my_url(country, game)
   'http://rank.shoryuken.com/rankings/rank?country=' + country + '&pchar=any+character&rankingType=ACTUAL&_filtermain=&id=' + game
 end
 
-# Create a Spreadsheet on google drive
-def save_data_on_spreadsheet(player_hash)
+def init_spreadsheet
   session = GoogleDrive::Session.from_config('config.json')
   ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
   ws[1, 1] = 'Rank country'
@@ -27,7 +26,17 @@ def save_data_on_spreadsheet(player_hash)
   ws[1, 6] = 'Actual score'
   ws[1, 7] = 'Number of tournament'
   ws[1, 8] = 'Country'
+  ws
+end
 
+def save_excel(spreadsheet)
+  spreadsheet.save
+  spreadsheet.reload
+end
+
+# Create a Spreadsheet on google drive
+def data_to_excel(player_hash)
+  ws = init_spreadsheet
   (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
     ws[row, 1] = player_hash['tr_index_country'][index]
     ws[row, 2] = player_hash['tr_index_inter'][index]
@@ -38,13 +47,12 @@ def save_data_on_spreadsheet(player_hash)
     ws[row, 7] = player_hash['tr_tournament'][index]
     ws[row, 8] = player_hash['tr_country'][index]
   end
-  ws.save
-  ws.reload
+  save_excel(ws)
 end
 
 # Scrap the infos
-def scrap(url, browser, game, style)
-  player = { 
+def scrap(url, browser, _game, _style)
+  player = {
     'tr_index_country' => [],
     'tr_index_inter' => [],
     'tr_name' => [],
@@ -53,8 +61,7 @@ def scrap(url, browser, game, style)
     'tr_actual_score' => [],
     'tr_tournament' => [],
     'tr_country' => []
-  }    
-  content_to_scrapp = ''
+  }
 
   browser.goto url
 
@@ -88,7 +95,7 @@ def scrap(url, browser, game, style)
       end
     end
   end
-  save_data_on_spreadsheet(player)
+  data_to_excel(player)
 end
 
 # Scraping data on smash GG for : Tournament
@@ -108,7 +115,6 @@ def main
   url = my_url(my_country, my_game)
   browser = Watir::Browser.new :firefox
   scrap(url, browser, my_game, style)
-
 end
 
 main
