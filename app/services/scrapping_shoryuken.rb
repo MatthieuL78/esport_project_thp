@@ -16,8 +16,6 @@ def my_url(country, game)
 end
 
 def init_spreadsheet
-  session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
   ws[1, 1] = 'Rank country'
   ws[1, 2] = 'Rank international'
   ws[1, 3] = 'Name'
@@ -27,11 +25,6 @@ def init_spreadsheet
   ws[1, 7] = 'Number of tournament'
   ws[1, 8] = 'Country'
   ws
-end
-
-def save_excel(spreadsheet)
-  spreadsheet.save
-  spreadsheet.reload
 end
 
 # Create a Spreadsheet on google drive
