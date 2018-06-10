@@ -29,15 +29,14 @@ def save_data_on_spreadsheet(player_hash)
   ws[1, 8] = 'Country'
 
   (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
-    # ws[row, 1] = player_hash['tr_index_country'][index]
-    # ws[row, 2] = player_hash['index_inter'][index]
-    # ws[row, 3] = player_hash['name'][index]
-    # ws[row, 4] = player_hash['team'][index]
-    # ws[row, 5] = player_hash['character'][index]
-    # ws[row, 6] = player_hash['actual_score'][index]
-    # ws[row, 7] = player_hash['tournament'][index]
-    # ws[row, 8] = player_hash['country'][index]
-    p index
+    ws[row, 1] = player_hash['tr_index_country'][index]
+    ws[row, 2] = player_hash['tr_index_inter'][index]
+    ws[row, 3] = player_hash['tr_name'][index]
+    ws[row, 4] = player_hash['tr_team'][index]
+    ws[row, 5] = player_hash['tr_character'][index]
+    ws[row, 6] = player_hash['tr_actual_score'][index]
+    ws[row, 7] = player_hash['tr_tournament'][index]
+    ws[row, 8] = player_hash['tr_country'][index]
   end
   ws.save
   ws.reload
@@ -89,8 +88,7 @@ def scrap(url, browser, game, style)
       end
     end
   end
-  p player['tr_index_country'].length
-  # save_data_on_spreadsheet(player)
+  save_data_on_spreadsheet(player)
 end
 
 # Scraping data on smash GG for : Tournament
