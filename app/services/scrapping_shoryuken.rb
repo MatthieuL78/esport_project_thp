@@ -16,100 +16,78 @@ def my_url(country, game)
 end
 
 # Create a Spreadsheet on google drive
-def save_data_on_spreadsheet(title, img, date, attend, place, game, style)
+def save_data_on_spreadsheet(index_country, index_inter, name, team, character, actual_score, tournament, country)
   session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
-  ws[1, 1] = 'Title'
-  ws[1, 2] = 'Image'
-  ws[1, 3] = 'Date'
-  ws[1, 4] = 'Attend'
-  ws[1, 5] = 'Place'
-  ws[1, 6] = 'Game'
-  ws[1, 7] = 'Style'
+  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
+  ws[1, 1] = 'Rank country'
+  ws[1, 2] = 'Rank international'
+  ws[1, 3] = 'Name'
+  ws[1, 4] = 'Team'
+  ws[1, 5] = 'Character'
+  ws[1, 6] = 'Actual score'
+  ws[1, 7] = 'Number of tournament'
+  ws[1, 8] = 'Country'
 
-  (@my_data..@my_data + title.length).each_with_index do |row, index|
-    ws[row, 1] = title[index]
-    ws[row, 2] = img[index]
-    ws[row, 3] = date[index]
-    ws[row, 4] = attend[index]
-    ws[row, 5] = place[index]
-    ws[row, 6] = game[index]
-    ws[row, 7] = style[index]
+  (2..index_country.length).each_with_index do |row, index|
+    ws[row, 1] = index_country[index]
+    ws[row, 2] = index_inter[index]
+    ws[row, 3] = name[index]
+    ws[row, 4] = team[index]
+    ws[row, 5] = character[index]
+    ws[row, 6] = actual_score[index]
+    ws[row, 7] = tournament[index]
+    ws[row, 8] = country[index]
   end
   ws.save
   ws.reload
-  @my_data += title.length
 end
 
 # Scrap the infos
-def scrap(url, browser, game, style, nb_of_event)
-  tr_img = []
-  tr_style = []
-  tr_game = []
-  title = ''
+def scrap(url, browser, game, style)
+  tr_index_country = []
+  tr_index_inter = []
+  tr_name = []
+  tr_team = []
+  tr_character = []
+  tr_actual_score = []
+  tr_tournament = []
+  tr_country = []
+  content_to_scrapp = ''
 
   browser.goto url
 
   # Get the datas
   # I don't create a function if the call is one line
-  title = browser.divs(class: 'TournamentCardHeading__title')
-  img = browser.divs(class: %w[TournamentCardIcon undefined])
-  date = browser.divs(class: 'TournamentCardHeading__information')
-  attend_place = browser.divs(class: 'TournamentCardContainer')
-
-  # Save in 3 differents tables
-  img.each do |div|
-    if div.image.exists?
-      tr_img << div.image.src
-    else
-      tr_img << ''
-    end
-  end
-
-  tr_title = title.map(&:text)
-
-  tr_date = date.map(&:text)
-
-  # To improve
-  tr_attend = attend_place.map do |div|
-    my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do |divbis|
-      if divbis.a.exists?
-        my_text = divbis.a.text.split('').take_while do |text|
-          text != ' '
+  content_to_scrapp = browser.tables(class: %w[table table-striped table-hover table-condensed])
+  content_to_scrapp.each do |table|
+    table.each_with_index do |row, index|
+      next if index == 0
+      row.each_with_index do |col, index|
+        case index
+        when 0
+          tr_index_country << col.text
+        when 1
+          tr_index_inter << col.text
+        when 2
+          tr_name << col.text
+        when 3
+          tr_team << col.text
+        when 4
+          tr_character << col.text
+        when 5
+          tr_actual_score << col.text
+        when 6
+          tr_tournament << col.text
+        when 7
+          tr_country << col.text
+        else
+          next
         end
-        my_text.join('')
       end
     end
-    if my_result[0].nil?
-      ' '
-    else
-      my_result[0]
-    end
   end
 
-  # To improve
-  tr_place = attend_place.map do |div|
-    my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do
-      if div.children[1].text[0].i? || div.children[1].text[0].nil?
-        'ONLINE'
-      else
-        div.children[1].span.text
-      end
-    end
-    if my_result[0].nil?
-      'ONLINE'
-    else
-      my_result[0]
-    end
-  end
-
-  # Put this in an other function
-  title.length.times do
-    tr_game << game.capitalize
-    tr_style << style.capitalize
-  end
-
-  save_data_on_spreadsheet(tr_title, tr_img, tr_date, tr_attend, tr_place, tr_game, tr_style)
+  save_data_on_spreadsheet(tr_index_country, tr_index_inter, tr_name, tr_team, tr_character, tr_actual_score, tr_tournament, tr_country)
 end
 
 # Scraping data on smash GG for : Tournament
@@ -128,6 +106,8 @@ def main
   
   url = my_url(my_country, my_game)
   browser = Watir::Browser.new :firefox
-  scrap(url, browser, game, style)
+  scrap(url, browser, my_game, style)
   
 end
+
+main
