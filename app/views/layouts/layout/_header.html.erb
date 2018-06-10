@@ -35,6 +35,7 @@
       <% elsif sponsor_signed_in? %>
         <%= image_tag (current_sponsor.avatar.thumb.url) %>
         <p>Sponsor: <%= current_sponsor.email %></p>
+        <p><%= link_to "Edit", edit_sponsor_registration_path %></p>
       <% else %>
         <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/user-512.png" alt="">
         <p>Welcome</p>
@@ -46,7 +47,7 @@
       <li><%= link_to "Classement", classement_ranking_path %></li>
 
       <% if player_signed_in? || sponsor_signed_in? %>
-      <li><%= link_to "Profil", root_path %></li>
+      <li><%= link_to "Edit", edit_sponsor_registration_path %></li>
       <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
       <li><%= link_to "Deconnexion", destroy_player_session_path, method: :delete %>
       <% else %>
