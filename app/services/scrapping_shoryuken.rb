@@ -10,29 +10,9 @@ class String
   end
 end
 
-# First URL to get all events
-def first_url(game)
-  'http://rank.shoryuken.com/api/top?game=' + game
-end
-
-# Get the number of event
-def nb_of_event(browser, url)
-  browser.goto url
-  item = browser.p(class: 'text-muted').text
-  table_of_item = item.split('').reverse_each.take_while do |letter|
-    letter != ' '
-  end
-  table_of_item.reverse.join('')
-end
-
 # Create my url
-def my_url(nb_of_event, page)
-  url_first_part = 'https://smash.gg/tournaments?per_page='
-  nb_per_page = nb_of_event
-  url_second_part = '&filter='
-  game = 'street fighter'
-  my_page = '&page=' + page
-  url_first_part + nb_per_page + url_second_part + game + my_page
+def my_url(country, game)
+  'http://rank.shoryuken.com/rankings/rank?country=' + country + '&pchar=any+character&rankingType=ACTUAL&_filtermain=&id=' + game
 end
 
 # Create a Spreadsheet on google drive
@@ -71,19 +51,8 @@ def scrap(url, browser, game, style, nb_of_event)
   browser.goto url
 
   # Get the datas
-  if @nb_event_integer >= 0
-    while title.length != nb_of_event
-      title = browser.divs(class: 'TournamentCardHeading__title')
-      sleep(1)
-    end
-  elsif @nb_event_integer.negative?
-    while title.length != @nb_event_integer + 100
-      title = browser.divs(class: 'TournamentCardHeading__title')
-      sleep(1)
-    end
-  end
-
   # I don't create a function if the call is one line
+  title = browser.divs(class: 'TournamentCardHeading__title')
   img = browser.divs(class: %w[TournamentCardIcon undefined])
   date = browser.divs(class: 'TournamentCardHeading__information')
   attend_place = browser.divs(class: 'TournamentCardContainer')
@@ -152,23 +121,13 @@ end
 
 def main
   # Add the following information :
-  my_game = 'street fighter'
+  my_game = 'T7'
   style = 'combat'
+  my_country = 'france'
   # End
-
-  @my_data = 2
-  my_page = 0
-
+  
+  url = my_url(my_country, my_game)
   browser = Watir::Browser.new :firefox
-
-  my_nb_event = nb_of_event(browser, first_url(my_game))
-  @nb_event_integer = my_nb_event.to_i
-
-  while @nb_event_integer.positive?
-    my_nb_event = '100'
-    my_page += 1
-    @nb_event_integer -= 100
-    url = my_url(my_nb_event, my_my_page.to_s)
-    scrap(url, browser, game, style, my_nb_event.to_i)
-  end
+  scrap(url, browser, game, style)
+  
 end
