@@ -26,7 +26,7 @@ def nb_of_event(browser, url)
 end
 
 # Create my url
-def my_url(nb_of_event, page)
+def my_url_event(nb_of_event, page)
   url_first_part = 'https://smash.gg/tournaments?per_page='
   nb_per_page = nb_of_event
   url_second_part = '&filter='
@@ -149,6 +149,7 @@ def scrap_event(url, browser, game, style, nb_of_event, row_max)
     data['tr_style'] << style.capitalize
   end
   data_to_excel(data, worksheet, row_max)
+
 end
 
 # Scraping data on smash GG for : Tournament
@@ -176,8 +177,8 @@ def main_event
     my_nb_event = '100'
     my_page += 1
     @nb_event_integer -= 100
-    url = my_url(my_nb_event, my_page.to_s)
-    scrap(url, browser, my_game, style, my_nb_event.to_i, row_max)
+    url = my_url_event(my_nb_event, my_page.to_s)
+    scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
     row_max += 100
   end
 end

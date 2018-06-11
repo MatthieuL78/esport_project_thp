@@ -11,7 +11,7 @@ require 'google_drive'
 # end
 
 # Create my url
-def my_url(game)
+def my_url_game(game)
   'https://sullygnome.com/game/' + game + '/30/summary'
 end
 
@@ -111,8 +111,8 @@ def main_game
   # End
   row_max = 2
 
-  url = my_url(my_game)
+  url = my_url_game(my_game)
   browser = Watir::Browser.new :firefox
-  scrap(url, browser, style, row_max)
+  scrap_game(url, browser, style, row_max)
   row_max += 100
 end

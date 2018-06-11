@@ -11,7 +11,7 @@ require 'google_drive'
 # end
 
 # Create my url
-def my_url(country, game)
+def my_url_player(country, game)
   'http://rank.shoryuken.com/rankings/rank?country=' + country + '&pchar=any+character&rankingType=ACTUAL&_filtermain=&id=' + game
 end
 
@@ -107,8 +107,8 @@ def main_player
   # End
   row_max = 2
 
-  url = my_url(my_country, my_game)
+  url = my_url_player(my_country, my_game)
   browser = Watir::Browser.new :firefox
-  scrap(url, browser, my_game, style, row_max)
+  scrap_player(url, browser, my_game, style, row_max)
   row_max += 100
 end
