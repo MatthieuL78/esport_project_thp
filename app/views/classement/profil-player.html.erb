@@ -1,0 +1,139 @@
+<div class="special-gamer-card">
+  <div class="header-card">
+    <%= link_to 'Edit', root_path(@gamer) %>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="" class="flag">
+    <img src="https://www.torcedores.com/content/uploads/2017/04/13355510_288240618182892_42057519_n1.jpg" alt="">
+<div class="nav-card">
+  <ul>
+    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
+    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt=""> </li>
+    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" alt=""> </li>
+  </ul>
+  </div>
+    <p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+  </div>
+<div class="mid-card">
+  <div class="graph-card">
+    <p>this a fake graph</p>
+    <img src="http://www.r-graph-gallery.com/wp-content/uploads/2016/05/142_basic_radar_chart_1.png" alt="">
+  </div>
+  <div class="activity-card">
+    <h3>sample</h3>
+
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+<%= link_to 'Back', root_path %>
+</div>
+
+<style media="screen">
+
+  .special-gamer-card{
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-card{
+    background: rgba(0,0,0,0.6);
+    color: #FFF;
+    padding: 5px;
+  }
+  .special-gamer-card .header-card{
+    justify-content: center;
+    background: url("https://image.noelshack.com/fichiers-md/2017/13/1490715864-5436-card-communaute.jpg") center center;
+    background-size: cover;
+    padding-top: 70px;
+  }
+  .special-gamer-card .header-card a{
+    top: 70px;
+    border: 4px solid #000;
+    border-radius: 35px;
+    padding: 0em 2em;
+    background: #222;
+    color: #EEE;
+    text-decoration: none;
+    position: absolute;
+    top: 70px;
+    right: 5px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,1);
+    overflow: hidden;
+  }
+  .special-gamer-card .header-card a:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 70%;
+      height: 100%;
+      background: rgba(255,255,255,.1);
+      transition: .5s;
+      transform: skewX(-15deg);
+  }
+  .special-gamer-card .header-card a:hover:before{
+      left: 210px;
+  }
+  .special-gamer-card .header-card a:after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -70px;
+      width: 50px;
+      height: 100%;
+      background: rgba(255,255,255,.1);
+      transition: .8s;
+      transform: skewX(-15deg);
+      transition-delay: .3s;
+  }
+  .special-gamer-card .header-card a:hover:after{
+      left: 210px;
+  }
+  .special-gamer-card .header-card img{
+    border-radius: 100%;
+    max-height: 40vh;
+  }
+  .special-gamer-card .header-card ul li{
+    display: inline;
+  }
+  .special-gamer-card .header-card .nav-card img{
+    width: 20px;
+  }
+  .special-gamer-card .header-card .bio{
+    background-color: #EEE;
+    padding: 1em;
+    font-weight: 100;
+    text-align: justify;
+  }
+  .mid-card{
+    display: flex;
+    background: red;
+  }
+  .graph-card{
+    flex: 1;
+    background: #555;
+  }
+  .graph-card img{
+    width: 100%;
+
+  }
+  .activity-card{
+    flex:1;
+    background: #FFF;
+  }
+  .activity-card li{
+    display: inline;
+  }
+  .activity-card li img{
+    width: 40px;
+  }
+  .flag{
+    position: absolute;
+    top: 90px;
+    left: 30%;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+  }
+</style>

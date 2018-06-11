@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get 'classement/ranking', to: 'classement#ranking'
   get 'classement/fullranking', to: 'classement#fullranking'
+  get 'classement/profil-player', to: 'classement#profil-player'
 
   get 'partenaire/sponsor', to: 'partenaire#sponsor', as: 'sponsor'
 
