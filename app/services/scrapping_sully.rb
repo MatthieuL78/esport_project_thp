@@ -15,10 +15,10 @@ def my_url(game)
   'https://sullygnome.com/game/' + game + '/30/summary'
 end
 
-def init_spreadsheet(titles, ws_url, ws_num)
+def init_spreadsheet(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key(ws_url).worksheets[ws_num]
-  titles.each_with_index { |title_value, index| ws[1, index + 1] = title_value }
+  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
+  worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
 end
 
@@ -28,12 +28,9 @@ def save_excel(spreadsheet)
 end
 
 # Create a Spreadsheet on google drive
-def data_to_excel(game_hash)
-  titles = ['Average viewers rank', 'Peak viewers rank', 'Average channels rank', 'Peak channels rank', 'Watch time', 'Max viewers', 'Average viewers', 'Ratio']
-  ws_num = 2
-  ws_url = '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
-  ws = init_spreadsheet(titles, ws_url, ws_num)
-  (2..game_hash['tr_avg_view_rk'].length + 2).each_with_index do |row, index|
+def data_to_excel(game_hash, worksheet_hash)
+  ws = init_spreadsheet(worksheet_hash)
+  (2..game_hash.keys[0].length + 2).each_with_index do |row, index|
     8.times do |i|
       ws[row, i + 1] = game_hash[game_hash.keys[i]][index]
     end
@@ -53,6 +50,13 @@ def scrap(url, browser, _style)
     'tr_avg_view' => [],
     'tr_ratio' => []
   }
+
+  worksheet = {
+    'titles' => ['Average viewers rank', 'Peak viewers rank', 'Average channels rank', 'Peak channels rank', 'Watch time', 'Max viewers', 'Average viewers', 'Ratio'],
+    'ws_num' => 2,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+  }
+  
 
   browser.goto url
 
@@ -90,7 +94,7 @@ def scrap(url, browser, _style)
     end
   end
 
-  data_to_excel(game)
+  data_to_excel(game, worksheet)
 end
 
 # Scraping data on smash GG for : Tournament
