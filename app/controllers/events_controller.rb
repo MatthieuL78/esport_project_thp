@@ -96,6 +96,13 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def show_scrapp; end
+
+  def scrapp_event
+    main_event
+    redirect_to events_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
