@@ -27,12 +27,12 @@ def save_excel(spreadsheet)
   spreadsheet.reload
 end
 
-# Create a Spreadsheet on google drive
-def data_to_excel(game_hash, worksheet_hash)
+# Add data on spreadsheet
+def data_to_excel(data_hash, worksheet_hash)
   ws = init_spreadsheet(worksheet_hash)
-  (2..game_hash.keys[0].length + 2).each_with_index do |row, index|
+  (2..data_hash.keys[0].length + 2).each_with_index do |row, index|
     8.times do |i|
-      ws[row, i + 1] = game_hash[game_hash.keys[i]][index]
+      ws[row, i + 1] = data_hash[data_hash.keys[i]][index]
     end
   end
   save_excel(ws)
@@ -40,7 +40,7 @@ end
 
 # Scrap the infos
 def scrap(url, browser, _style)
-  game = {
+  data = {
     'tr_avg_view_rk' => [],
     'tr_pk_view_rk' => [],
     'tr_avg_chan_rk' => [],
@@ -66,13 +66,13 @@ def scrap(url, browser, _style)
   content_to_scrapp.each_with_index do |col, index|
     case index
     when 0
-      game['tr_avg_view_rk'] << col.text
+      data['tr_avg_view_rk'] << col.text
     when 1
-      game['tr_pk_view_rk'] << col.text
+      data['tr_pk_view_rk'] << col.text
     when 2
-      game['tr_avg_chan_rk'] << col.text
+      data['tr_avg_chan_rk'] << col.text
     when 3
-      game['tr_pk_chan_rk'] << col.text
+      data['tr_pk_chan_rk'] << col.text
     else
       next
     end
@@ -82,19 +82,19 @@ def scrap(url, browser, _style)
   content_to_scrapp.each_with_index do |col, index|
     case index
     when 0
-      game['tr_watch_time'] << col.text
+      data['tr_watch_time'] << col.text
     when 1
-      game['tr_max_view'] << col.text
+      data['tr_max_view'] << col.text
     when 2
-      game['tr_avg_view'] << col.text
+      data['tr_avg_view'] << col.text
     when 3
-      game['tr_ratio'] << col.text
+      data['tr_ratio'] << col.text
     else
       next
     end
   end
 
-  data_to_excel(game, worksheet)
+  data_to_excel(data, worksheet)
 end
 
 # Scraping data on smash GG for : Tournament
