@@ -63,7 +63,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def data_create; end
+  def show_data_event; end
 
   def save_data_from_spreadsheet
     session = GoogleDrive::Session.from_config('config.json')
@@ -96,11 +96,9 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
-  def show_scrapp; end
-
   def scrapp_event
     main_event
-    redirect_to events_path
+    redirect_to show_data_event_path
   end
 
   private

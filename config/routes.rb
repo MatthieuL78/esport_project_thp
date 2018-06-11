@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   devise_for :sponsors
   devise_for :players
   resources :events
-  get 'data_events', to: 'events#data_create', as: 'data_event'
+
+  get 'show_data_event', to: 'events#show_data_event', as: 'show_data_event'
   post 'data_events', to: 'events#save_data_from_spreadsheet', as: 'data_event_create'
-  get 'show_scrapp', to: 'events#show_scrapp', as: 'scrapp_event'
   post 'show_scrapp', to: 'events#scrapp_event', as: 'scrapp_event_create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
