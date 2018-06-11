@@ -47,20 +47,19 @@ def save_excel(spreadsheet)
   spreadsheet.reload
 end
 
-# Create a Spreadsheet on google drive
-def data_to_excel(tournament_hash, worksheet_hash)
+# Add data on spreadsheet
+def data_to_excel(data_hash, worksheet_hash, row_max)
   ws = init_spreadsheet(worksheet_hash)
-  (@my_data..@my_data + tournament_hash['tr_title'].length).each_with_index do |row, index|
-    tournament_hash.size.times do |i|
-      ws[row, i + 1] = tournament_hash[tournament_hash.keys[i]][index]
+  (row_max..data_hash[data_hash.keys[0]].length + row_max).each_with_index do |col, index|
+    worksheet_hash['titles'].length.times do |i|
+      ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
     end
   end
   save_excel(ws)
-  @my_data += tournament_hash['tr_title'].length
 end
 
 # Scrap the infos
-def scrap(url, browser, game, style, nb_of_event)
+def scrap(url, browser, game, style, nb_of_event, row_max)
   title = ''
   data = {
     'tr_title' => [],
@@ -149,8 +148,7 @@ def scrap(url, browser, game, style, nb_of_event)
     data['tr_game'] << game.capitalize
     data['tr_style'] << style.capitalize
   end
-
-  data_to_excel(data, worksheet)
+  data_to_excel(data, worksheet, row_max)
 end
 
 # Scraping data on smash GG for : Tournament
@@ -166,7 +164,7 @@ def main
   style = 'Combat'
   # End
 
-  @my_data = 2
+  row_max = 2
   my_page = 0
 
   browser = Watir::Browser.new :firefox
@@ -179,7 +177,8 @@ def main
     my_page += 1
     @nb_event_integer -= 100
     url = my_url(my_nb_event, my_page.to_s)
-    scrap(url, browser, my_game, style, my_nb_event.to_i)
+    scrap(url, browser, my_game, style, my_nb_event.to_i, row_max)
+    row_max += 100
   end
 end
 
