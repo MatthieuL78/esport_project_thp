@@ -48,21 +48,22 @@ class DatasController < ApplicationController
       1.upto(8) do |col|
         case col
         when 1
-          event.name = ws[row, col]
+          player.index_country = ws[row, col]
         when 2
-          event.image = ws[row, col]
+          player.index_inter = ws[row, col]
         when 3
-          event.date = ws[row, col]
+          player.nickname = ws[row, col]
         when 4
-          event.attendee = ws[row, col]
+          # We have to change when we will create team
+          player.team = ws[row, col]
         when 5
-          event.place = ws[row, col]
+          player.character = ws[row, col]
         when 6
-          event.game = ws[row, col]
+          player.actual_score = ws[row, col]
         when 7
-          event.game = ws[row, col]
+          player.tournament = ws[row, col]
         else
-          event.style = ws[row, col]
+          player.country = ws[row, col]
         end
       end
       player.save
@@ -81,21 +82,21 @@ class DatasController < ApplicationController
       1.upto(8) do |col|
         case col
         when 1
-          event.name = ws[row, col]
+          game.avg_view_rk = ws[row, col]
         when 2
-          event.image = ws[row, col]
+          game.pk_view_rk = ws[row, col]
         when 3
-          event.date = ws[row, col]
+          game.avg_chan_rk = ws[row, col]
         when 4
-          event.attendee = ws[row, col]
+          game.pk_chan_rk = ws[row, col]
         when 5
-          event.place = ws[row, col]
+          game.watch_time = ws[row, col]
         when 6
-          event.game = ws[row, col]
+          game.max_view = ws[row, col]
         when 7
-          event.game = ws[row, col]  
+          game.avg_view = ws[row, col]  
         else
-          event.style = ws[row, col]
+          game.ratio = ws[row, col]
         end
       end
       game.save
