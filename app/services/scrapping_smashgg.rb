@@ -35,11 +35,10 @@ def my_url(nb_of_event, page)
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
-def init_spreadsheet
+def init_spreadsheet(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
-  title = ['Title', 'Image', 'Date', 'Attend', 'Place', 'Game', 'Style']
-  title.each_with_index { |title_value, index| ws[1, index + 1] = title_value }
+  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
+  worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
 end
 
@@ -49,8 +48,8 @@ def save_excel(spreadsheet)
 end
 
 # Create a Spreadsheet on google drive
-def data_to_excel(tournament_hash)
-  ws = init_spreadsheet
+def data_to_excel(tournament_hash, worksheet_hash)
+  ws = init_spreadsheet(worksheet_hash)
   (@my_data..@my_data + tournament_hash['tr_title'].length).each_with_index do |row, index|
     tournament_hash.size.times do |i|
       ws[row, i + 1] = tournament_hash[tournament_hash.keys[i]][index]
@@ -63,7 +62,7 @@ end
 # Scrap the infos
 def scrap(url, browser, game, style, nb_of_event)
   title = ''
-  tournament = {
+  data = {
     'tr_title' => [],
     'tr_image' => [],
     'tr_date' => [],
@@ -71,6 +70,12 @@ def scrap(url, browser, game, style, nb_of_event)
     'tr_place' => [],
     'tr_game' => [],
     'tr_style' => []
+  }
+
+  worksheet = {
+    'titles' => ['Title', 'Image', 'Date', 'Attend', 'Place', 'Game', 'Style'],
+    'ws_num' => 0,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
 
   browser.goto url
@@ -94,20 +99,20 @@ def scrap(url, browser, game, style, nb_of_event)
   attend_place = browser.divs(class: 'TournamentCardContainer')
 
   # Save in 3 differents tables
-  tournament['tr_title'] = title.map(&:text)
+  data['tr_title'] = title.map(&:text)
 
   img.each do |div|
     if div.image.exists?
-      tournament['tr_image'] << div.image.src
+      data['tr_image'] << div.image.src
     else
-      tournament['tr_image'] << ''
+      data['tr_image'] << ''
     end
   end
 
-  tournament['tr_date'] = date.map(&:text)
+  data['tr_date'] = date.map(&:text)
 
   # To improve
-  tournament['tr_attend'] = attend_place.map do |div|
+  data['tr_attend'] = attend_place.map do |div|
     my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do |divbis|
       if divbis.a.exists?
         my_text = divbis.a.text.split('').take_while do |text|
@@ -124,7 +129,7 @@ def scrap(url, browser, game, style, nb_of_event)
   end
 
   # To improve
-  tournament['tr_place'] = attend_place.map do |div|
+  data['tr_place'] = attend_place.map do |div|
     my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do
       if div.children[1].text[0].i? || div.children[1].text[0].nil?
         'ONLINE'
@@ -140,12 +145,12 @@ def scrap(url, browser, game, style, nb_of_event)
   end
 
   # Put this in an other function
-  tournament['tr_title'].length.times do
-    tournament['tr_game'] << game.capitalize
-    tournament['tr_style'] << style.capitalize
+  data['tr_title'].length.times do
+    data['tr_game'] << game.capitalize
+    data['tr_style'] << style.capitalize
   end
 
-  data_to_excel(tournament)
+  data_to_excel(data, worksheet)
 end
 
 # Scraping data on smash GG for : Tournament

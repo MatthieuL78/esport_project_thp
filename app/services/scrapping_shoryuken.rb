@@ -40,7 +40,7 @@ end
 
 # Scrap the infos
 def scrap(url, browser, _game, _style)
-  player = {
+  data = {
     'tr_index_country' => [],
     'tr_index_inter' => [],
     'tr_name' => [],
@@ -68,28 +68,28 @@ def scrap(url, browser, _game, _style)
       row.each_with_index do |col, index|
         case index
         when 0
-          player['tr_index_country'] << col.text
+          data['tr_index_country'] << col.text
         when 1
-          player['tr_index_inter'] << col.text
+          data['tr_index_inter'] << col.text
         when 2
-          player['tr_name'] << col.text
+          data['tr_name'] << col.text
         when 3
-          player['tr_team'] << col.text
+          data['tr_team'] << col.text
         when 4
-          player['tr_character'] << col.text
+          data['tr_character'] << col.text
         when 5
-          player['tr_actual_score'] << col.text
+          data['tr_actual_score'] << col.text
         when 6
-          player['tr_tournament'] << col.text
+          data['tr_tournament'] << col.text
         when 7
-          player['tr_country'] << col.text
+          data['tr_country'] << col.text
         else
           next
         end
       end
     end
   end
-  data_to_excel(player, worksheet)
+  data_to_excel(data, worksheet)
 end
 
 # Scraping data on smash GG for : Tournament
