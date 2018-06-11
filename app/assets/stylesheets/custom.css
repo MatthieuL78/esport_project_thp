@@ -336,9 +336,9 @@ footer p{
 }
 #main-content .div-arrow{
   position: absolute;
-  width: 200px;
-  top: 60vh;
+  top: 80vh;
   left: 50%;
+  width: 100px;
   transform: translateX(-50%);
 }
 #main-content .arrow {
@@ -356,7 +356,6 @@ footer p{
   margin-top: 5px;
 }
 #main-content .span-text{
-  margin-top: 90px;
   font-size: 14px;
   background: inherit;
 }
@@ -378,7 +377,7 @@ footer p{
   margin: 10px auto;
 }
 #main-content .btn-call a:hover{
-
+  background-color: rgba(206, 251, 95,.8);
 }
 /* version bureau */
 @media (min-width: 725px) {
