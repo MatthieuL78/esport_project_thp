@@ -38,13 +38,14 @@ class DatasController < ApplicationController
   end
 
   def save_data_from_spreadsheet_player
+    i = 1
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
     2.upto(10) do |row|
       # 
       # Need to check on the database if the event already exist
       #
-      player = Player.new
+      player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
       1.upto(8) do |col|
         case col
         when 1
@@ -67,8 +68,9 @@ class DatasController < ApplicationController
         end
       end
       player.save
+      i += 1
     end
-    redirect_to players_path
+    # redirect_to players_path
   end
 
   def save_data_from_spreadsheet_game
@@ -99,9 +101,11 @@ class DatasController < ApplicationController
           game.ratio = ws[row, col]
         end
       end
+      game.name = 'Tekken 7'
+      game.type = 'Combat'
       game.save
     end
-    redirect_to games_path
+    # redirect_to games_path
   end
 
   def scrapp_events
