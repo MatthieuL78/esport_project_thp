@@ -28,9 +28,9 @@ def save_excel(spreadsheet)
 end
 
 # Add data on spreadsheet
-def data_to_excel(data_hash, worksheet_hash)
+def data_to_excel(data_hash, worksheet_hash, row_max)
   ws = init_spreadsheet(worksheet_hash)
-  (2..data_hash[data_hash.keys[0]].length + 2).each_with_index do |col, index|
+  (row_max..data_hash[data_hash.keys[0]].length + row_max).each_with_index do |col, index|
     worksheet_hash['titles'].length.times do |i|
       ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
     end
@@ -39,7 +39,7 @@ def data_to_excel(data_hash, worksheet_hash)
 end
 
 # Scrap the infos
-def scrap(url, browser, _style)
+def scrap(url, browser, _style, row_max)
   data = {
     'tr_avg_view_rk' => [],
     'tr_pk_view_rk' => [],
@@ -94,7 +94,7 @@ def scrap(url, browser, _style)
     end
   end
 
-  data_to_excel(data, worksheet)
+  data_to_excel(data, worksheet, row_max)
 end
 
 # Scraping data on smash GG for : Tournament
@@ -109,10 +109,12 @@ def main
   my_game = 'Tekken_7'
   style = 'combat'
   # End
+  row_max = 2
 
   url = my_url(my_game)
   browser = Watir::Browser.new :firefox
-  scrap(url, browser, style)
+  scrap(url, browser, style, row_max)
+  row_max += 100
 end
 
 main
