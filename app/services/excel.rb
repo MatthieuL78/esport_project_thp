@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Initialization Spreadsheet
 def init_spreadsheet(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
