@@ -44,8 +44,8 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      event = Event.new
-      1.upto(7) do |col|
+      player = Player.new
+      1.upto(8) do |col|
         case col
         when 1
           event.name = ws[row, col]
@@ -59,13 +59,15 @@ class DatasController < ApplicationController
           event.place = ws[row, col]
         when 6
           event.game = ws[row, col]
+        when 7
+          event.game = ws[row, col]
         else
           event.style = ws[row, col]
         end
       end
-      event.save
+      player.save
     end
-    redirect_to events_path
+    redirect_to players_path
   end
 
   def save_data_from_spreadsheet_game
@@ -75,8 +77,8 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      event = Event.new
-      1.upto(7) do |col|
+      game = Game.new
+      1.upto(8) do |col|
         case col
         when 1
           event.name = ws[row, col]
@@ -90,13 +92,15 @@ class DatasController < ApplicationController
           event.place = ws[row, col]
         when 6
           event.game = ws[row, col]
+        when 7
+          event.game = ws[row, col]  
         else
           event.style = ws[row, col]
         end
       end
-      event.save
+      game.save
     end
-    redirect_to events_path
+    redirect_to games_path
   end
 
   def scrapp_events
