@@ -112,5 +112,3 @@ def main
   scrap(url, browser, my_game, style, row_max)
   row_max += 100
 end
-
-main

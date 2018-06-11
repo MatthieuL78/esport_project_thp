@@ -116,5 +116,3 @@ def main
   scrap(url, browser, style, row_max)
   row_max += 100
 end
-
-main

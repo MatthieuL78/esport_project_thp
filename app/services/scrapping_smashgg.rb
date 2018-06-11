@@ -181,5 +181,3 @@ def main
     row_max += 100
   end
 end
-
-main
