@@ -1,6 +1,5 @@
 <div id="main-content">
   <h1>Connexion</h1>
-  <a href="#wrapper2" class="arrow"></a>
   <div id="wrapper1">
     <h2>Espace Gamer</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -28,8 +27,10 @@
 
     <%= render "players/shared/links" %>
 
-    <span><p class="span-text">Compte Pro<p></span>
-
+    <span class="div-arrow">
+      <p class="span-text">Compte Pro<p>
+      <a href="#wrapper2" class="arrow"></a>
+    </span>
   </div>
 
   <hr>
