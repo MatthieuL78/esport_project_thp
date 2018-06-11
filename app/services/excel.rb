@@ -14,12 +14,12 @@ def save_excel(spreadsheet)
   spreadsheet.reload
 end
 
-# Add data on speadsheet
+# Add data on spreadsheet
 def data_to_excel(data_hash, worksheet_hash)
   ws = init_spreadsheet(worksheet_hash)
-  (2..data_hash.keys[0].length + 2).each_with_index do |row, index|
-    8.times do |i|
-      ws[row, i + 1] = data_hash[data_hash.keys[i]][index]
+  (2..data_hash[data_hash.keys[0]].length + 2).each_with_index do |col, index|
+    worksheet_hash['titles'].length.times do |i|
+      ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
     end
   end
   save_excel(ws)

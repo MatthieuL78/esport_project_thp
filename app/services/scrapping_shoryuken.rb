@@ -27,23 +27,12 @@ def save_excel(spreadsheet)
   spreadsheet.reload
 end
 
-# Create a Spreadsheet on google drive
-def data_to_excel(player_hash)
-  ws = init_spreadsheet
-  (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
-    8.times do |i|
-      ws[row, i + 1] = player_hash[player_hash.keys[i]][index]
-    end
-  end
-  save_excel(ws)
-end
-
 # Add data on spreadsheet
 def data_to_excel(data_hash, worksheet_hash)
   ws = init_spreadsheet(worksheet_hash)
-  (2..data_hash.keys[0].length + 2).each_with_index do |row, index|
-    8.times do |i|
-      ws[row, i + 1] = data_hash[data_hash.keys[i]][index]
+  (2..data_hash[data_hash.keys[0]].length + 2).each_with_index do |col, index|
+    worksheet_hash['titles'].length.times do |i|
+      ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
     end
   end
   save_excel(ws)
@@ -63,9 +52,9 @@ def scrap(url, browser, _game, _style)
   }
 
   worksheet = {
-    title => ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country'],
-    ws_num = 1,
-    ws_url = '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+    'titles' => ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country'],
+    'ws_num' => 1,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
 
   browser.goto url
@@ -100,7 +89,7 @@ def scrap(url, browser, _game, _style)
       end
     end
   end
-  data_to_excel(player)
+  data_to_excel(player, worksheet)
 end
 
 # Scraping data on smash GG for : Tournament
