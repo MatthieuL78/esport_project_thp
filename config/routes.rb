@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'events/scrapp_event'
   get 'partenaire/sponsor'
   root 'home#index'
   get 'rank/index', to: 'rank#index'
