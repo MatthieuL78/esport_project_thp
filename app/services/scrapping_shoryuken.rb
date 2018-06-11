@@ -15,12 +15,16 @@ def my_url(country, game)
   'http://rank.shoryuken.com/rankings/rank?country=' + country + '&pchar=any+character&rankingType=ACTUAL&_filtermain=&id=' + game
 end
 
-def init_spreadsheet
+def init_spreadsheet(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
-  title = ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country']
-  title.each_with_index { |title_value, index| ws[1, index + 1] = title_value }
+  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
+  worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
+end
+
+def save_excel(spreadsheet)
+  spreadsheet.save
+  spreadsheet.reload
 end
 
 # Create a Spreadsheet on google drive
@@ -29,6 +33,17 @@ def data_to_excel(player_hash)
   (2..player_hash['tr_index_country'].length).each_with_index do |row, index|
     8.times do |i|
       ws[row, i + 1] = player_hash[player_hash.keys[i]][index]
+    end
+  end
+  save_excel(ws)
+end
+
+# Add data on spreadsheet
+def data_to_excel(data_hash, worksheet_hash)
+  ws = init_spreadsheet(worksheet_hash)
+  (2..data_hash.keys[0].length + 2).each_with_index do |row, index|
+    8.times do |i|
+      ws[row, i + 1] = data_hash[data_hash.keys[i]][index]
     end
   end
   save_excel(ws)
@@ -45,6 +60,12 @@ def scrap(url, browser, _game, _style)
     'tr_actual_score' => [],
     'tr_tournament' => [],
     'tr_country' => []
+  }
+
+  worksheet = {
+    title => ['Rank country', 'Rank international', 'Name', 'Team', 'Character', 'Actual score', 'Number of tournament', 'Country'],
+    ws_num = 1,
+    ws_url = '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
 
   browser.goto url
