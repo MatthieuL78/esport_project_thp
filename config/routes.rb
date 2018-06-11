@@ -12,9 +12,13 @@ Rails.application.routes.draw do
   devise_for :players
   resources :events
 
-  get 'show_data_event', to: 'events#show_data_event', as: 'show_data_event'
-  post 'data_events', to: 'events#save_data_from_spreadsheet', as: 'data_event_create'
-  post 'show_scrapp', to: 'events#scrapp_event', as: 'scrapp_event_create'
+  get 'show_data', to: 'datas#show_data', as: 'show_data_event'
+  post 'show_data', to: 'datas#scrapp_events', as: 'scrapp_events'
+  post 'show_data', to: 'datas#scrapp_players', as: 'scrapp_players'
+  post 'show_data', to: 'datas#scrapp_games', as: 'scrapp_datas'
+  post 'show_data', to: 'datas#save_data_from_spreadsheet_event', as: 'save_events'
+  post 'show_data', to: 'datas#save_data_from_spreadsheet_player', as: 'save_players'
+  post 'show_data', to: 'datas#save_data_from_spreadsheet_game', as: 'save_games'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
