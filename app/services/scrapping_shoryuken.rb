@@ -86,7 +86,7 @@ def main_player
   end 
 
   url = my_url_player(my_country, my_game)
-  browser = Watir::Browser.new :chrome
+  browser = Watir::Browser.new :chrome, opts
   scrap_player(url, browser, my_game, style, row_max)
   row_max += 100
 end
