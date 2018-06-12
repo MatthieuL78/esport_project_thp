@@ -4,6 +4,7 @@ require 'google_drive'
 
 # Controller for admin website data
 class DatasController < ApplicationController
+  protect_from_forgery with: :exception
   def show_data; end
 
   def save_data_from_spreadsheet_event
