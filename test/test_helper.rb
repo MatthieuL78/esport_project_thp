@@ -7,15 +7,10 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
-
-  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
-
-  Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
-    )
-  end
+  options = Selenium::WebDriver::Chrome::Options.new
+  chrome_bin_path = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  options.binary = chrome_bin_path if chrome_bin_path # only use custom path on heroku
+  options.add_argument('--headless') # this may be optional
+  driver = Selenium::WebDriver.for :chrome, options: options
+  driver.navigate.to "https://stackoverflow.com"
 end
