@@ -2,20 +2,20 @@
 
 require 'google_drive'
 
+# Controller for admin website data
 class DatasController < ApplicationController
-
   def show_data; end
 
   def save_data_from_spreadsheet_event
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
     2.upto(ws.num_rows) do |row|
-      # 
+      #
       # Need to check on the database if the event already exist
       #
       if Event.where(name: ws[row, 1]).exists?
         event = Event.find_by(name: ws[row, 1])
-      else  
+      else
         event = Event.new
       end
       1.upto(ws.num_cols) do |col|
@@ -49,7 +49,7 @@ class DatasController < ApplicationController
       if Player.where(nickname: ws[row, 3]).exists?
         player = Player.find_by_nickname(ws[row, 3])
       else
-        player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
+        player = Player.create!(email: 'jack@jack' + i.to_s + '.com', password: Devise.friendly_token.first(8))
       end
       1.upto(ws.num_cols) do |col|
         case col
@@ -82,9 +82,6 @@ class DatasController < ApplicationController
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[2]
     2.upto(ws.num_rows) do |row|
-      # 
-      # Need to check on the database if the event already exist
-      #
       if Game.where(name: ws[row, 1]).exists?
         game = Game.find_by(name: ws[row, 1])
       else
@@ -119,6 +116,7 @@ class DatasController < ApplicationController
     # redirect_to games_path
   end
 
+  # 1 function for all
   def scrapp_events
     main_event
     # add a flash alert
@@ -132,11 +130,8 @@ class DatasController < ApplicationController
   end
 
   def scrapp_games
-  	main_game
+    main_game
     # add a flash alert
-  	redirect_to show_data_event_path
+    redirect_to show_data_event_path
   end
-
-  private
-
 end
