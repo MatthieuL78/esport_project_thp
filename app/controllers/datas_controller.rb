@@ -9,12 +9,12 @@ class DatasController < ApplicationController
   def save_data_from_spreadsheet_event
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
-    2.upto(10) do |row|
+    2.upto(ws.num_rows) do |row|
       # 
       # Need to check on the database if the event already exist
       #
       event = Event.new
-      1.upto(7) do |col|
+      1.upto(ws.num_cols) do |col|
         case col
         when 1
           event.name = ws[row, col]
@@ -41,12 +41,12 @@ class DatasController < ApplicationController
     i = 1
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
-    2.upto(10) do |row|
+    2.upto(ws.num_rows) do |row|
       # 
       # Need to check on the database if the event already exist
       #
       player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
-      1.upto(8) do |col|
+      1.upto(ws.num_cols) do |col|
         case col
         when 1
           player.index_country = ws[row, col]
@@ -76,12 +76,12 @@ class DatasController < ApplicationController
   def save_data_from_spreadsheet_game
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[2]
-    2.upto(10) do |row|
+    2.upto(ws.num_rows) do |row|
       # 
       # Need to check on the database if the event already exist
       #
       game = Game.new
-      1.upto(8) do |col|
+      1.upto(ws.num_cols) do |col|
         case col
         when 1
           game.avg_view_rk = ws[row, col]
