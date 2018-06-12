@@ -42,15 +42,15 @@ class DatasController < ApplicationController
   end
 
   def save_data_from_spreadsheet_player
-    i = 1
+    i = 10
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
     2.upto(ws.num_rows) do |row|
       # 
       # Need to check on the database if the event already exist
       #
-      if Player.nickname_exist?
-        player = Player.nickname
+      if Player.where(nickname: ws[row, 3]).exists?
+        player = Player.find_by_nickname(ws[row, 3])
       else
         player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
       end

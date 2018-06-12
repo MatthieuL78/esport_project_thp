@@ -4,6 +4,5 @@ class Player < ApplicationRecord
   has_and_belongs_to_many :games
   has_and_belongs_to_many :sponsors
 
-  scope :nickname, -> { find_by(nickname: ws[row, 3]) }
-  scope :nickname_exist, -> { where(nickname: ws[row, 3]).exists? }  
+  scope :find_by_nickname, -> (my_nickname) { find_by nickname: my_nickname }
 end
