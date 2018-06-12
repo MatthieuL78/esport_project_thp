@@ -44,7 +44,4 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {"binary" => "/app/.apt/usr/bin/google-chrome"})
-  driver = Selenium::WebDriver.for :remote, url: 'http://localhost:4444/wd/hub', desired_capabilities: caps
-
 end
