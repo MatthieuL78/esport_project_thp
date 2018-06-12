@@ -92,4 +92,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+
+  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+
 end
