@@ -46,7 +46,7 @@ Rails.application.configure do
 
   chrome_bin = ENV['GOOGLE_CHROME_SHIM']
 
-  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+  chrome_opts = '/usr/bin/google-chrome'
   
   config.include Capybara::DSL
 
