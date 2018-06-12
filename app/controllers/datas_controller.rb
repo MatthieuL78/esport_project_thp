@@ -13,7 +13,11 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      event = Event.new
+      if Event.where(name: ws[row, 1]).exists?
+        event = Event.find_by(name: ws[row, 1])
+      else  
+        event = Event.new
+      end
       1.upto(ws.num_cols) do |col|
         case col
         when 1
@@ -45,8 +49,8 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      if Player.where(nickname: ws[row, 3]).exists?
-        player = Player.find_by(name: ws[row, 3])
+      if Player.nickname_exist?
+        player = Player.nickname
       else
         player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
       end
