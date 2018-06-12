@@ -9,8 +9,10 @@ def my_url_game(game)
 end
 
 # Scrap the infos
-def scrap_game(url, browser, _style, row_max)
+def scrap_game(url, browser, game, style, row_max)
   data = {
+    'tr_name' => [game],
+    'tr_style' => [style],
     'tr_avg_view_rk' => [],
     'tr_pk_view_rk' => [],
     'tr_avg_chan_rk' => [],
@@ -22,11 +24,10 @@ def scrap_game(url, browser, _style, row_max)
   }
 
   worksheet = {
-    'titles' => ['Average viewers rank', 'Peak viewers rank', 'Average channels rank', 'Peak channels rank', 'Watch time', 'Max viewers', 'Average viewers', 'Ratio'],
+    'titles' => ['name', 'style', 'Average viewers rank', 'Peak viewers rank', 'Average channels rank', 'Peak channels rank', 'Watch time', 'Max viewers', 'Average viewers', 'Ratio'],
     'ws_num' => 2,
     'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
-
 
   browser.goto url
 
@@ -63,7 +64,6 @@ def scrap_game(url, browser, _style, row_max)
       next
     end
   end
-
   data_to_excel(data, worksheet, row_max)
 end
 
@@ -77,12 +77,12 @@ end
 def main_game
   # Add the following information :
   my_game = 'Tekken_7'
-  style = 'combat'
+  my_style = 'combat'
   # End
   row_max = 2
 
   url = my_url_game(my_game)
   browser = Watir::Browser.new :firefox
-  scrap_game(url, browser, style, row_max)
+  scrap_game(url, browser, my_game, my_style, row_max)
   row_max += 100
 end
