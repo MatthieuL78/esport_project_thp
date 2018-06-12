@@ -45,7 +45,11 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
+      if Player.where(nickname: ws[row, 3]).exists?
+        player = Player.find_by(name: ws[row, 3])
+      else
+        player = Player.create!(email: "jack@jack" + i.to_s + ".com", password: Devise.friendly_token.first(8))
+      end
       1.upto(ws.num_cols) do |col|
         case col
         when 1
@@ -122,5 +126,7 @@ class DatasController < ApplicationController
   	main_game
   	redirect_to show_data_event_path
   end
+
+  private
 
 end
