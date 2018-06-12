@@ -88,7 +88,11 @@ class DatasController < ApplicationController
       # 
       # Need to check on the database if the event already exist
       #
-      game = Game.new
+      if Game.where(name: ws[row, 2]).exists?
+        game = Game.find_by_name(ws[row, 2])
+      else
+        game = Game.new
+      end
       1.upto(ws.num_cols) do |col|
         case col
         when 1
