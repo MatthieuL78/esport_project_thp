@@ -103,7 +103,7 @@ class DatasController < ApplicationController
         when 8
           game.max_view = ws[row, col]
         when 9
-          game.avg_view = ws[row, col]  
+          game.avg_view = ws[row, col]
         else
           game.ratio = ws[row, col]
         end
