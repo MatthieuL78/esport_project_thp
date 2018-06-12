@@ -3,43 +3,13 @@
 require 'watir'
 require 'google_drive'
 
-# Check if a string is an integer
-class String
-  def i?
-    !!(self =~ /\A[-+]?[0-9]+\z/)
-  end
-end
-
 # Create my url
-def my_url(country, game)
+def my_url_player(country, game)
   'http://rank.shoryuken.com/rankings/rank?country=' + country + '&pchar=any+character&rankingType=ACTUAL&_filtermain=&id=' + game
 end
 
-def init_spreadsheet(worksheet_hash)
-  session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
-  worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
-  ws
-end
-
-def save_excel(spreadsheet)
-  spreadsheet.save
-  spreadsheet.reload
-end
-
-# Add data on spreadsheet
-def data_to_excel(data_hash, worksheet_hash, row_max)
-  ws = init_spreadsheet(worksheet_hash)
-  (row_max..data_hash[data_hash.keys[0]].length + row_max).each_with_index do |col, index|
-    worksheet_hash['titles'].length.times do |i|
-      ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
-    end
-  end
-  save_excel(ws)
-end
-
 # Scrap the infos
-def scrap(url, browser, _game, _style, row_max)
+def scrap_player(url, browser, _game, _style, row_max)
   data = {
     'tr_index_country' => [],
     'tr_index_inter' => [],
@@ -99,7 +69,7 @@ end
 
 # Make a table with all the game's name to scrap
 
-def main
+def main_player
   # Add the following information :
   my_game = 'T7'
   style = 'combat'
@@ -107,10 +77,8 @@ def main
   # End
   row_max = 2
 
-  url = my_url(my_country, my_game)
+  url = my_url_player(my_country, my_game)
   browser = Watir::Browser.new :firefox
-  scrap(url, browser, my_game, style, row_max)
+  scrap_player(url, browser, my_game, style, row_max)
   row_max += 100
 end
-
-main

@@ -3,13 +3,6 @@
 require 'watir'
 require 'google_drive'
 
-# Check if a string is an integer
-class String
-  def i?
-    !!(self =~ /\A[-+]?[0-9]+\z/)
-  end
-end
-
 # First URL to get all events
 def first_url(game)
   'https://smash.gg/tournaments?filter=' + game
@@ -26,7 +19,7 @@ def nb_of_event(browser, url)
 end
 
 # Create my url
-def my_url(nb_of_event, page)
+def my_url_event(nb_of_event, page)
   url_first_part = 'https://smash.gg/tournaments?per_page='
   nb_per_page = nb_of_event
   url_second_part = '&filter='
@@ -35,31 +28,8 @@ def my_url(nb_of_event, page)
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
-def init_spreadsheet(worksheet_hash)
-  session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
-  worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
-  ws
-end
-
-def save_excel(spreadsheet)
-  spreadsheet.save
-  spreadsheet.reload
-end
-
-# Add data on spreadsheet
-def data_to_excel(data_hash, worksheet_hash, row_max)
-  ws = init_spreadsheet(worksheet_hash)
-  (row_max..data_hash[data_hash.keys[0]].length + row_max).each_with_index do |col, index|
-    worksheet_hash['titles'].length.times do |i|
-      ws[col, i + 1] = data_hash[data_hash.keys[i]][index]
-    end
-  end
-  save_excel(ws)
-end
-
 # Scrap the infos
-def scrap(url, browser, game, style, nb_of_event, row_max)
+def scrap_event(url, browser, game, style, nb_of_event, row_max)
   title = ''
   data = {
     'tr_title' => [],
@@ -149,6 +119,7 @@ def scrap(url, browser, game, style, nb_of_event, row_max)
     data['tr_style'] << style.capitalize
   end
   data_to_excel(data, worksheet, row_max)
+
 end
 
 # Scraping data on smash GG for : Tournament
@@ -158,7 +129,7 @@ end
 
 # Make a table with all the game's name to scrap
 
-def main
+def main_event
   # Add the following information :
   my_game = 'Street fighter'
   style = 'Combat'
@@ -176,10 +147,8 @@ def main
     my_nb_event = '100'
     my_page += 1
     @nb_event_integer -= 100
-    url = my_url(my_nb_event, my_page.to_s)
-    scrap(url, browser, my_game, style, my_nb_event.to_i, row_max)
+    url = my_url_event(my_nb_event, my_page.to_s)
+    scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
     row_max += 100
   end
 end
-
-main
