@@ -43,4 +43,19 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+
+  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+  
+  config.include Capybara::DSL
+
+  Capybara.register_driver :chrome do |app|
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+    )
+  end
+  
 end
