@@ -46,7 +46,7 @@ Rails.application.configure do
 
   chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
 
-  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+  chrome_opts = '/app/.apt/usr/bin/google-chrome'
   
   config.include Capybara::DSL
 
@@ -57,5 +57,5 @@ Rails.application.configure do
       desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
     )
   end
-  
+
 end
