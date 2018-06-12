@@ -138,7 +138,7 @@ def main_event
   row_max = 2
   my_page = 0
 
-  browser = Watir::Browser.new :phantomjs
+  browser = Watir::Browser.new :chrome
 
   my_nb_event = nb_of_event(browser, first_url(my_game))
   @nb_event_integer = my_nb_event.to_i
