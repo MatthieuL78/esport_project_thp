@@ -10,11 +10,8 @@ class DatasController < ApplicationController
     session = GoogleDrive::Session.from_config('config.json')
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
     2.upto(ws.num_rows) do |row|
-      #
-      # Need to check on the database if the event already exist
-      #
       if Event.where(name: ws[row, 1]).exists?
-        event = Event.find_by(name: ws[row, 1])
+        event = Event.find_by_name(ws[row, 1])
       else
         event = Event.new
       end
@@ -83,7 +80,7 @@ class DatasController < ApplicationController
     ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[2]
     2.upto(ws.num_rows) do |row|
       if Game.where(name: ws[row, 1]).exists?
-        game = Game.find_by(name: ws[row, 1])
+        game = Game.find_by_name(ws[row, 1])
       else
         game = Game.new
       end
