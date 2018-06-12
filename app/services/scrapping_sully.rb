@@ -82,7 +82,7 @@ def main_game
   row_max = 2
 
   url = my_url_game(my_game)
-  browser = Watir::Browser.new :firefox
+  browser = Watir::Browser.new :chrome
   scrap_game(url, browser, my_game, my_style, row_max)
   row_max += 100
 end
