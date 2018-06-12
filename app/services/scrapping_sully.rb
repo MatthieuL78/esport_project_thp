@@ -26,7 +26,7 @@ def scrap_game(url, browser, _style, row_max)
     'ws_num' => 2,
     'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
-  
+
 
   browser.goto url
 
