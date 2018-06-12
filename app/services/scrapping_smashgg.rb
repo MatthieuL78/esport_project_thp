@@ -146,7 +146,12 @@ def main_event
     opts.merge!( options: {binary: chrome_bin})
   end 
 
-  browser = Watir::Browser.new :chrome
+  options = Selenium::WebDriver::Chrome::Options.new
+  chrome_bin_path = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  options.binary = chrome_bin_path if chrome_bin_path # only use custom path on heroku
+  options.add_argument('--headless') # this may be optional
+  browser = Selenium::WebDriver.for :chrome, options: options
+  # browser = Watir::Browser.new :chrome
 
   my_nb_event = nb_of_event(browser, first_url(my_game))
   @nb_event_integer = my_nb_event.to_i

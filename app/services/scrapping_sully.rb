@@ -81,16 +81,16 @@ def main_game
   # End
   row_max = 2
 
-  opts = {
-    headless: true
-  }
-
-  if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
-    opts.merge!( options: {binary: chrome_bin})
-  end 
+  options = Selenium::WebDriver::Chrome::Options.new
+  chrome_bin_path = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  options.binary = chrome_bin_path if chrome_bin_path # only use custom path on heroku
+  options.add_argument('--headless') # this may be optional
+  
+  # driver.navigate.to "https://stackoverflow.com"
 
   url = my_url_game(my_game)
-  browser = Watir::Browser.new :chrome
+  # browser = Watir::Browser.new :chrome
+  browser = Selenium::WebDriver.for :chrome, options: options
   scrap_game(url, browser, my_game, my_style, row_max)
   row_max += 100
 end
