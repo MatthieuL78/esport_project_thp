@@ -44,7 +44,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  chrome_bin = ENV['GOOGLE_CHROME_SHIM']
 
   chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
   
