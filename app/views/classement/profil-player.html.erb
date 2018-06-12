@@ -1,30 +1,46 @@
-<div class="special-gamer-card">
-  <div class="header-card">
-    <%= link_to 'Edit', root_path(@gamer) %>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="" class="flag">
-    <img src="https://www.torcedores.com/content/uploads/2017/04/13355510_288240618182892_42057519_n1.jpg" alt="">
-<div class="nav-card">
-  <ul>
-    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
-    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt=""> </li>
-    <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" alt=""> </li>
-  </ul>
+<div class="special-gamer-card flip-container" ontouchstart="this.classList.toggle('click');">
+  <div class="flipper">
+    <div class="front">
+    <div class="header-card">
+      <%= link_to 'Edit', root_path(@gamer) %>
+      <img src="https://www.torcedores.com/content/uploads/2017/04/13355510_288240618182892_42057519_n1.jpg" class="gamer-photo-card" alt="">
+      <div class="about-card">
+        <h2>@Player.name</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="" class="flag">
+        <ul>
+          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
+          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt=""> </li>
+          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" alt=""> </li>
+        </ul>
+        <h3>Player.name Nindô:</h3>
+        <p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+      </div>
+    </div>
+    <div class="mid-card">
+      <ul>
+        <li><span class="card-basic-info">Classement:</span><span class="card-basic-result">1</span></li>
+        <li><span class="card-basic-info">Best performance</span><span class="card-basic-result">top 8 a Tekken world tour</span></li>
+        <li><span class="card-basic-info">Rival</span><span class="card-basic-result">Luigi</span></li>
+        <li><span class="card-basic-info">Exemple</span><span class="card-basic-result">du text opif</span></li>
+      </ul>
+    </div>
+    <!-- <p id="notice"><%= notice %></p>
+    <%= link_to 'Back', root_path %> -->
   </div>
-    <p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+  <div class="back">
+    <div class="special-gamer-card-back">
+      <div class="header-card-back">
+        <h2>@Player.name</h2>
+      </div>
+      <div class="graph-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcp75b2qfsNwI8zWwuctigcRbin-wMn158USAG4PDmCqMO6vTg7w" alt="">
+      </div>
+      <div class="contact-card">
+        <%= link_to 'Follow', root_path %>
+      </div>
+    </div>
   </div>
-<div class="mid-card">
-  <div class="graph-card">
-    <p>this a fake graph</p>
-    <img src="http://www.r-graph-gallery.com/wp-content/uploads/2016/05/142_basic_radar_chart_1.png" alt="">
   </div>
-  <div class="activity-card">
-    <h3>sample</h3>
-
-  </div>
-</div>
-
-<p id="notice"><%= notice %></p>
-<%= link_to 'Back', root_path %>
 </div>
 
 <style media="screen">
@@ -36,10 +52,20 @@
     display: flex;
     flex-direction: column;
   }
-  .nav-card{
+  .about-card{
     background: rgba(0,0,0,0.6);
     color: #FFF;
     padding: 5px;
+  }
+  .about-card h2{
+    padding: 0;
+    margin: 0;
+  }
+  .about-card h3{
+    padding: 1em 1em 0.3em 1em;
+    margin: 0 auto;
+    text-align: left;
+    width: 80%;
   }
   .special-gamer-card .header-card{
     justify-content: center;
@@ -90,50 +116,120 @@
   .special-gamer-card .header-card a:hover:after{
       left: 210px;
   }
-  .special-gamer-card .header-card img{
-    border-radius: 100%;
-    max-height: 40vh;
+  .special-gamer-card .header-card .gamer-photo-card{
+    border-radius: 4px;
+    width: 30vh;
   }
   .special-gamer-card .header-card ul li{
     display: inline;
   }
-  .special-gamer-card .header-card .nav-card img{
-    width: 20px;
+  .special-gamer-card .header-card .about-card .flag{
+    width: 60px;
+  }
+  .special-gamer-card .header-card .about-card img{
+    width: 40px;
+    border-radius: 0;
   }
   .special-gamer-card .header-card .bio{
-    background-color: #EEE;
+    margin: 0 auto;
+    background-color: rgba(20,20,20,0.4);
+    border: 1px solid #EEE;
+    font-style: italic;
+    width: 80%;
     padding: 1em;
     font-weight: 100;
     text-align: justify;
   }
   .mid-card{
     display: flex;
-    background: red;
+    background-color: rgba(31, 31, 81,1);
   }
-  .graph-card{
+  .mid-card ul{
+    margin: auto;
+    padding: 5px;
+    width: 80%;
+  }
+  .mid-card ul li{
+    margin: 5px;
+    display: flex;
+    -webkit-transform: skew(-20deg);
+	   -moz-transform: skew(-20deg);
+	     -o-transform: skew(-20deg);
+    font-size: 20px;
+  }
+  .mid-card .card-basic-info{
+    background: #F45;
     flex: 1;
-    background: #555;
+    margin-right: 5px;
   }
-  .graph-card img{
-    width: 100%;
+  .mid-card .card-basic-result{
+    flex: 2;
+    background: #AAA;
+  }
 
+  /***************** flipping animation start*/
+  /***** back of the card start */
+  .special-gamer-card-back{
+    height: 100vh;
+    width: 100%;
+    background: rgba(31, 31, 81,.8);
   }
-  .activity-card{
-    flex:1;
-    background: #FFF;
+  .special-gamer-card-back .header-card-back{
+    background: rgba(31, 31, 81,.8);
+    color: #EEE;
   }
-  .activity-card li{
-    display: inline;
+  .special-gamer-card-back .graph-card{
+    background: #DDD;
   }
-  .activity-card li img{
-    width: 40px;
+  .special-gamer-card-back .contact-card{
+    margin: 10px auto;
   }
-  .flag{
-    position: absolute;
-    top: 90px;
-    left: 30%;
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
+  .special-gamer-card-back .contact-card a{
+    padding: 5px 55px;
+    color: #222;
+    background-color: rgba(206, 251, 95,1);
+    box-shadow: 1px 1px 20px 0;
   }
+  /***** back of the card end */
+  /* entire container, keeps perspective */
+.flip-container {
+	perspective: 600px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 100%;
+	height: 100%;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+  /***************** flipping animation end*/
 </style>

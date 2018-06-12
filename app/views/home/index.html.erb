@@ -1,11 +1,16 @@
 <div class="next">
   <h2>up next</h2>
   <div class="section">
-    <div class="article">
-      <%= @events.each do |event| %>
-      <h1><%= event.name %></h1>
+
+
+      <% @events.each do |event| %>
+      <div class="article">
+      <%= image_tag("#{event.image}") %>
+      <h3><%= event.name %></h3>
+      <p><%= event.place %></p>
+        </div>
       <% end %>
-    </div>
+
 
     <div class="article">
       <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">

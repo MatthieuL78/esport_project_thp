@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get 'partenaire/sponsor'
   root 'home#index'
-  get 'rank/index', to: 'rank#index'
 
   get 'classement/ranking', to: 'classement#ranking'
   get 'classement/fullranking', to: 'classement#fullranking'
