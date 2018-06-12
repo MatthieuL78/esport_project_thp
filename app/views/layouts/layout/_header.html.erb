@@ -14,9 +14,10 @@
       <% if player_signed_in? || sponsor_signed_in? %>
       <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
       <li><%= link_to "Profil", root_path, class: "profil" %></li>
-      <li><%= link_to "Sign Out", root_path, method: :delete %></li>
+      <li><%= link_to "Deconnexion", destroy_player_session_path, method: :delete %>
+
       <% else %>
-      <li><%= link_to "Connexion", root_path, class: "connexion" %></li>
+      <li><%= link_to "Connexion", new_player_session_path %></li>
       <% end %>
     </ul>
   </div>
@@ -28,18 +29,27 @@
   <div class="menuapp">
     <div class="container">
       <div class="profil">
+        <% if player_signed_in? %>
         <img src="https://www.les-transferts.com/wp-content/uploads/2018/05/52a1abaa-5538-4590-b365-c840a82a2402.jpg" alt="">
-        <p>@Username</p>
+        <p>Gamer: <%= current_player.email %></p>
+      <% elsif sponsor_signed_in? %>
+        <%= image_tag (current_sponsor.avatar.thumb.url) %>
+        <p>Sponsor: <%= current_sponsor.email %></p>
+        <p><%= link_to "Edit", edit_sponsor_registration_path %></p>
+      <% else %>
+        <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/user-512.png" alt="">
+        <p>Welcome</p>
+        <% end %>
       </div>
     </div>
     <ul class="menu-link">
       <li><%= link_to "Actu", root_path, class: "news" %></li>
       <li><%= link_to "Classement", classement_ranking_path %></li>
-      <li><%= link_to "Profil", root_path %></li>
-      <% if player_signed_in? || sponsor_signed_in? %>
 
+      <% if player_signed_in? || sponsor_signed_in? %>
+      <li><%= link_to "Edit", edit_sponsor_registration_path %></li>
       <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
-      <li><%= link_to "Logout", root_path %></li>
+      <li><%= link_to "Deconnexion", destroy_player_session_path, method: :delete %>
       <% else %>
       <li><%= link_to "Connexion", new_player_session_path %></li>
       <% end %>

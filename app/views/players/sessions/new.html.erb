@@ -1,8 +1,7 @@
 <div id="main-content">
   <h1>Connexion</h1>
-  <div id="main-players">
+  <div id="wrapper1">
     <h2>Espace Gamer</h2>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email %><br />
@@ -27,81 +26,21 @@
     <% end %>
 
     <%= render "players/shared/links" %>
+
+    <span class="div-arrow">
+      <p class="span-text">Compte Pro<p>
+      <a href="#wrapper2" class="arrow"></a>
+    </span>
   </div>
-  <div id="main-sponsors">
+
+  <hr>
+  <div id="wrapper2">
     <h2>Espace sponsor</h2>
-
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
-      </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end -%>
-
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
-    <% end %>
-
-    <%= render "players/shared/links" %>
+    <%= image_tag('https://media.eventhubs.com/static/images/eventhubslogo1.png') %>
+    <p>Lorem ipsum dolor sit ame magna aco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="btn-call">
+      <%= link_to "Connexion", sponsor_session_path %>
+    </div>
   </div>
+
 </div>
-
-<style media="screen">
-
-
-#main-content{
-  height: 100vh;
-  display: flex;
-  text-align: center;
-  flex-direction: column;
-  background: #ADA996;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-#main-content #main-players,#main-sponsors{
-  margin: auto;
-}
-#main-content h1{
-  padding-top: 100px;
-  text-align: center;
-}
-@media (min-width: 725px) {
-  #main-content{
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    background: #ADA996;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-  #main-content h1{
-    display: flex;
-    background-color: rgba(31, 31, 81,1);
-    color: #FFF;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  #main-content #main-players{
-    flex: 1;
-    margin: auto;
-    border-right: 1px solid #DDD;
-  }
-  #main-content #main-sponsors{
-    flex: 1;
-    margin: auto;
-  }
-}
-</style>
