@@ -8,14 +8,13 @@ Le e-sport existe depuis plusieurs année mais depuis peu ce phénomène a attir
 
 Conscient de cette problématique, nous avons décidés de mettre en place une plateforme de mise en relation entre sponsors et pro-gamers simplifié, qui permettrait au sponsors de voir assez rapidement et clairement les meilleurs joueurs du moments pour ensuite les sponsoriser.
 
-## Organisation
+## Team
 
-Les profils dans notre groupe sont plutôt variés. Matthieu est plus à l'aise avec le back-office, tendis que Geraldy et Thomas sont plutôt front-office. L'organistation des tâches c'est donc fait assez naturellement. 
+# Back: Matthieu
 
-### Back
+Exmples de tâches : CRUD sponsor, joueur, game, event.
 
-zljhfljhsdljflsdkjfmskjdmck
+# Front: Geraldy, Thomas
 
-### Front
-
-Geraldy et Thomas ce sont répartis les tâches en deux parties : Thomas faisait les maquettes graphiques, l'experience user, et Geraldy s'occupait de retransmettre les maquettes en lignes codes pour rendre le site fonctionnel.
+Exeples de tâches pour Thomas: Conceptions de maquettes design, experience user.
+Exemples de tâches pour Geralady: Retranscrire les maquettes en lignes de codes.
