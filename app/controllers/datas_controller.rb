@@ -7,11 +7,7 @@ class DatasController < ApplicationController
   protect_from_forgery with: :exception
   def show_data; end
 
-  def save_data_from_spreadsheet_event
-    worksheet = {
-    'ws_num' => 0,
-    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
-    }
+  def save_data_event(worksheet)
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       if Event.where(name: ws[row, 1]).exists?
@@ -48,13 +44,9 @@ class DatasController < ApplicationController
     redirect_to events_path
   end
 
-  def save_data_from_spreadsheet_player
+  def save_data_player(worksheet)
     # We have to create another model for the real version
     i = 10
-    worksheet = {
-    'ws_num' => 1,
-    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
-    }
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       if Player.where(nickname: ws[row, 3]).exists?
@@ -89,11 +81,7 @@ class DatasController < ApplicationController
     # redirect_to players_path
   end
 
-  def save_data_from_spreadsheet_game
-    worksheet = {
-    'ws_num' => 2,
-    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
-    }
+  def save_data_game(worksheet)
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       ws[row, 1] = replace_underscore_by_space(ws[row, 1])
@@ -146,5 +134,27 @@ class DatasController < ApplicationController
     end
     # add a flash alert
     redirect_to show_data_event_path
+  end
+
+  def save_ws_on_db
+    worksheet = {
+    'ws_num' => 0,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+    }
+    case params[:save_id]
+    when '1'
+      sava_data_event(worksheet)
+    when '2'
+      worksheet['ws_num'] = 1
+      sava_data_player(worksheet)
+    when '3'
+      worksheet['ws_num'] = 2
+      sava_data_game(worksheet)
+    else
+      # flash alert bug
+      return
+    end
+    # add a flash alert
+    redirect_to show_data_event_path   
   end
 end
