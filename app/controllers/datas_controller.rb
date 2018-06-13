@@ -90,11 +90,13 @@ class DatasController < ApplicationController
       else
         game = Game.new
       end
-      0.upto(ws.num_cols) do |col|
+      1.upto(ws.num_cols) do |col|
         
-        a = Game.column_names[col + 1].to_sym
+        # byebug
+        a = Game.column_names[col].to_sym
         # game.attributes = Game.column_names[col + 1].to_sym 
-        
+        game.attributes = { a => ws[row, col] }
+
         # Il faut faire : game.attributes[:Game.column_names[col + 1].to_sym] pour 
         # appeler correctement le nom de la colonne
         # column_name = Game.column_name[col + 1]
@@ -154,10 +156,10 @@ class DatasController < ApplicationController
     when '1'
       save_data_event(worksheet)
     when '2'
-      worksheet[:ws_num] = 1
+      worksheet['ws_num'] = 1
       save_data_player(worksheet)
     when '3'
-      worksheet[:ws_num] = 2
+      worksheet['ws_num'] = 2
       save_data_game(worksheet)
     else
       # flash alert bug
