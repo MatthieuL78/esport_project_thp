@@ -137,16 +137,8 @@ def main_event
 
   row_max = 2
   my_page = 0
-
-  opts = {
-    headless: true
-  }
-
-  if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
-    opts.merge!( options: {binary: chrome_bin})
-  end 
   
-  browser = Watir::Browser.new :chrome, opts
+  browser = Watir::Browser.new :chrome, scrapping_options
 
   my_nb_event = nb_of_event(browser, first_url(my_game))
   @nb_event_integer = my_nb_event.to_i
