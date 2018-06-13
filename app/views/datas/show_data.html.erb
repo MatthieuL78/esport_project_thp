@@ -2,9 +2,9 @@
 <br/>
 <br/>
 <br/>
-<p><%= button_to 'Scrapping Event', action: 'scrapp_events' %></p>
-<p><%= button_to 'Scrapping Player', action: 'scrapp_players' %></p>
-<p><%= button_to 'Scrapping Game', action: 'scrapp_games' %></p>
+<p><%= button_to 'Scrapping Event', scrapp_id: 1, action: 'scrapp_datas' %></p>
+<p><%= button_to 'Scrapping Player', scrapp_id: 2, action: 'scrapp_datas' %></p>
+<p><%= button_to 'Scrapping Game', scrapp_id: 3, action: 'scrapp_datas' %></p>
 <br/>
 <p><%= button_to 'Save data Event', action: 'save_data_from_spreadsheet_event' %></p>
 <p><%= button_to 'Save data Player', action: 'save_data_from_spreadsheet_player' %></p>

@@ -115,8 +115,18 @@ class DatasController < ApplicationController
   end
 
   # 1 function for all
-  def scrapp_events
-    main_event
+  def scrapp_datas
+    case params(:scrapp_id)
+    when '1'  
+      main_event
+    when '2'
+      main_player
+    when '3'
+      main_game
+    else
+      # flash alert bug
+      return
+    end
     # add a flash alert
     redirect_to show_data_event_path
   end
