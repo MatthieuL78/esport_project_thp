@@ -88,7 +88,7 @@ class DatasController < ApplicationController
       1.upto(ws.num_cols) do |col|
         case col
         when 1
-          game.name = ws[row, col]
+          game.name = replace_underscore_by_space(ws[row, col])
         when 2
           game.style = ws[row, col]
         when 3

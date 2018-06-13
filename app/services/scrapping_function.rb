@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Options for the browser
 def scrapping_options
   opts = {
     headless: true
@@ -14,4 +15,8 @@ def scrapping_options
     opts.merge!( options: {binary: chrome_bin})
   end
   opts  
+end
+
+def replace_underscore_by_space(string)
+  string.tr('_', ' ')
 end
