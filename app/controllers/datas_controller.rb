@@ -29,7 +29,13 @@ class DatasController < ApplicationController
         when 5
           event.place = ws[row, col]
         when 6
-          event.game = ws[row, col]
+          if Game.where(name: ws[row, col]).exists?
+            if event.games.find_by(name: ws[row, col]).nil?
+              event.games << Game.find_by_name(ws[row, col])
+            end
+          else
+            event.game = ws[row, col]
+          end
         else
           event.style = ws[row, col]
         end
@@ -116,7 +122,6 @@ class DatasController < ApplicationController
 
   # Function for scrapping
   def scrapp_datas
-    p params[:scrapp_id]
     case params[:scrapp_id]
     when '1'  
       main_event

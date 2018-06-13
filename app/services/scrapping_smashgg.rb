@@ -23,7 +23,7 @@ def my_url_event(nb_of_event, page)
   url_first_part = 'https://smash.gg/tournaments?per_page='
   nb_per_page = nb_of_event
   url_second_part = '&filter='
-  game = 'Street fighter'
+  game = 'Street fighter V'
   my_page = '&page=' + page
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
@@ -115,8 +115,8 @@ def scrap_event(url, browser, game, style, nb_of_event, row_max)
 
   # Put this in an other function
   data['tr_title'].length.times do
-    data['tr_game'] << game.capitalize
-    data['tr_style'] << style.capitalize
+    data['tr_game'] << game
+    data['tr_style'] << style
   end
   data_to_excel(data, worksheet, row_max)
 
@@ -131,7 +131,7 @@ end
 
 def main_event
   # Add the following information :
-  my_game = 'Street fighter'
+  my_game = 'Street fighter V'
   style = 'Combat'
   # End
 
@@ -143,12 +143,12 @@ def main_event
   my_nb_event = nb_of_event(browser, first_url(my_game))
   @nb_event_integer = my_nb_event.to_i
 
-  while @nb_event_integer.positive?
+  # while @nb_event_integer.positive?
     my_nb_event = '100'
     my_page += 1
     @nb_event_integer -= 100
     url = my_url_event(my_nb_event, my_page.to_s)
     scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
     row_max += 100
-  end
+  # end
 end

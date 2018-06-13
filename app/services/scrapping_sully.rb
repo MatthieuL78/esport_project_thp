@@ -76,7 +76,7 @@ end
 
 def main_game
   # Add the following information :
-  my_game = 'Street_Fighter_V'
+  my_game = 'Street_fighter_V'
   my_style = 'combat'
   # End
   row_max = 2
