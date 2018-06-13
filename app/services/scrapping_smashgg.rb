@@ -3,13 +3,6 @@
 require 'watir'
 require 'google_drive'
 
-# Check if a string is an integer
-class String
-  def i?
-    !!(self =~ /\A[-+]?[0-9]+\z/)
-  end
-end
-
 # First URL to get all events
 def first_url(game)
   'https://smash.gg/tournaments?filter=' + game
@@ -26,47 +19,33 @@ def nb_of_event(browser, url)
 end
 
 # Create my url
-def my_url(nb_of_event, page)
+def my_url_event(nb_of_event, page)
   url_first_part = 'https://smash.gg/tournaments?per_page='
   nb_per_page = nb_of_event
   url_second_part = '&filter='
-  game = 'street fighter'
+  game = 'Street fighter'
   my_page = '&page=' + page
   url_first_part + nb_per_page + url_second_part + game + my_page
 end
 
-# Create a Spreadsheet on google drive
-def save_data_on_spreadsheet(title, img, date, attend, place, game, style)
-  session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
-  ws[1, 1] = 'Title'
-  ws[1, 2] = 'Image'
-  ws[1, 3] = 'Date'
-  ws[1, 4] = 'Attend'
-  ws[1, 5] = 'Place'
-  ws[1, 6] = 'Game'
-  ws[1, 7] = 'Style'
-
-  (@my_data..@my_data + title.length).each_with_index do |row, index|
-    ws[row, 1] = title[index]
-    ws[row, 2] = img[index]
-    ws[row, 3] = date[index]
-    ws[row, 4] = attend[index]
-    ws[row, 5] = place[index]
-    ws[row, 6] = game[index]
-    ws[row, 7] = style[index]
-  end
-  ws.save
-  ws.reload
-  @my_data += title.length
-end
-
 # Scrap the infos
-def scrap(url, browser, game, style, nb_of_event)
-  tr_img = []
-  tr_style = []
-  tr_game = []
+def scrap_event(url, browser, game, style, nb_of_event, row_max)
   title = ''
+  data = {
+    'tr_title' => [],
+    'tr_image' => [],
+    'tr_date' => [],
+    'tr_attend' => [],
+    'tr_place' => [],
+    'tr_game' => [],
+    'tr_style' => []
+  }
+
+  worksheet = {
+    'titles' => ['Title', 'Image', 'Date', 'Attend', 'Place', 'Game', 'Style'],
+    'ws_num' => 0,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+  }
 
   browser.goto url
 
@@ -89,20 +68,20 @@ def scrap(url, browser, game, style, nb_of_event)
   attend_place = browser.divs(class: 'TournamentCardContainer')
 
   # Save in 3 differents tables
+  data['tr_title'] = title.map(&:text)
+
   img.each do |div|
     if div.image.exists?
-      tr_img << div.image.src
+      data['tr_image'] << div.image.src
     else
-      tr_img << ''
+      data['tr_image'] << ''
     end
   end
 
-  tr_title = title.map(&:text)
-
-  tr_date = date.map(&:text)
+  data['tr_date'] = date.map(&:text)
 
   # To improve
-  tr_attend = attend_place.map do |div|
+  data['tr_attend'] = attend_place.map do |div|
     my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do |divbis|
       if divbis.a.exists?
         my_text = divbis.a.text.split('').take_while do |text|
@@ -119,7 +98,7 @@ def scrap(url, browser, game, style, nb_of_event)
   end
 
   # To improve
-  tr_place = attend_place.map do |div|
+  data['tr_place'] = attend_place.map do |div|
     my_result = div.divs(class: %w[InfoList__title InfoList__section]).map do
       if div.children[1].text[0].i? || div.children[1].text[0].nil?
         'ONLINE'
@@ -135,12 +114,12 @@ def scrap(url, browser, game, style, nb_of_event)
   end
 
   # Put this in an other function
-  title.length.times do
-    tr_game << game.capitalize
-    tr_style << style.capitalize
+  data['tr_title'].length.times do
+    data['tr_game'] << game.capitalize
+    data['tr_style'] << style.capitalize
   end
+  data_to_excel(data, worksheet, row_max)
 
-  save_data_on_spreadsheet(tr_title, tr_img, tr_date, tr_attend, tr_place, tr_game, tr_style)
 end
 
 # Scraping data on smash GG for : Tournament
@@ -150,16 +129,24 @@ end
 
 # Make a table with all the game's name to scrap
 
-def main
+def main_event
   # Add the following information :
-  my_game = 'street fighter'
-  style = 'combat'
+  my_game = 'Street fighter'
+  style = 'Combat'
   # End
 
-  @my_data = 2
+  row_max = 2
   my_page = 0
 
-  browser = Watir::Browser.new :firefox
+  opts = {
+    headless: true
+  }
+
+  if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
+    opts.merge!( options: {binary: chrome_bin})
+  end 
+  
+  browser = Watir::Browser.new :chrome, opts
 
   my_nb_event = nb_of_event(browser, first_url(my_game))
   @nb_event_integer = my_nb_event.to_i
@@ -168,7 +155,8 @@ def main
     my_nb_event = '100'
     my_page += 1
     @nb_event_integer -= 100
-    url = my_url(my_nb_event, my_my_page.to_s)
-    scrap(url, browser, game, style, my_nb_event.to_i)
+    url = my_url_event(my_nb_event, my_page.to_s)
+    scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
+    row_max += 100
   end
 end
