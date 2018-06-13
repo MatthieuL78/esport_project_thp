@@ -91,7 +91,14 @@ class DatasController < ApplicationController
         game = Game.new
       end
       0.upto(ws.num_cols) do |col|
-        game.column_name[col + 1] = ws[row, col]
+        
+        a = Game.column_names[col + 1].to_sym
+        # game.attributes = Game.column_names[col + 1].to_sym 
+        
+        # Il faut faire : game.attributes[:Game.column_names[col + 1].to_sym] pour 
+        # appeler correctement le nom de la colonne
+        # column_name = Game.column_name[col + 1]
+        # game.column_name = ws[row, col]
 
         # case col
         # when 1
