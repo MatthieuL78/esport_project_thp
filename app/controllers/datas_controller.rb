@@ -8,8 +8,11 @@ class DatasController < ApplicationController
   def show_data; end
 
   def save_data_from_spreadsheet_event
-    session = GoogleDrive::Session.from_config('config.json')
-    ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[0]
+    worksheet = {
+    'ws_num' => 0,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+    }
+    ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       if Event.where(name: ws[row, 1]).exists?
         event = Event.find_by_name(ws[row, 1])
@@ -46,7 +49,8 @@ class DatasController < ApplicationController
   end
 
   def save_data_from_spreadsheet_player
-    i = 100
+    # We have to create another model for the real version
+    i = 10
     worksheet = {
     'ws_num' => 1,
     'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
