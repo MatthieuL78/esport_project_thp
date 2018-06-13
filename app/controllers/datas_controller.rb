@@ -83,9 +83,13 @@ class DatasController < ApplicationController
   end
 
   def save_data_from_spreadsheet_game
-    session = GoogleDrive::Session.from_config('config.json')
-    ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[2]
+    worksheet = {
+    'ws_num' => 2,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+    }
+    ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
+      ws[row, 1] = replace_underscore_by_space(ws[row, 1])
       if Game.where(name: ws[row, 1]).exists?
         game = Game.find_by_name(ws[row, 1])
       else
@@ -94,7 +98,7 @@ class DatasController < ApplicationController
       1.upto(ws.num_cols) do |col|
         case col
         when 1
-          game.name = replace_underscore_by_space(ws[row, col])
+          game.name = ws[row, col]
         when 2
           game.style = ws[row, col]
         when 3
@@ -123,7 +127,7 @@ class DatasController < ApplicationController
   # Function for scrapping
   def scrapp_datas
     case params[:scrapp_id]
-    when '1'  
+    when '1'
       main_event
     when '2'
       main_player
@@ -136,5 +140,4 @@ class DatasController < ApplicationController
     # add a flash alert
     redirect_to show_data_event_path
   end
-
 end
