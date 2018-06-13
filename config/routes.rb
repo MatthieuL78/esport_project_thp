@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'statistique/index'
   root 'home#index'
 
   get 'partenaire/sponsor'

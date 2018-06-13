@@ -1,48 +1,28 @@
-<div class="special-gamer-card flip-container" ontouchstart="this.classList.toggle('click');">
-  <div class="flipper">
-    <div class="front">
-    <div class="header-card">
+<div class="special-gamer-card flip-container">
+    <div class="header-card header-card-user">
       <%= image_tag (current_sponsor.avatar.thumb.url), class: "gamer-photo-card" %>
       <div class="about-card">
         <ul class="player-info" >
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="" class="flag"></li>
           <li><p><%= current_sponsor.email %></p></li>
         </ul>
-        <ul class="reseaux-sociaux">
-          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
-          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt=""> </li>
-          <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" alt=""> </li>
-        </ul>
-        <h3>Player.name Nindô:</h3>
-        <p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
       </div>
     </div>
     <div class="mid-card">
       <ul>
-        <li><span class="card-basic-info">Classement</span><span class="card-basic-result">1</span></li>
-        <li><span class="card-basic-info">Record</span><span class="card-basic-result">top 8 a Tekken world tour</span></li>
-        <li><span class="card-basic-info">Rival</span><span class="card-basic-result">Luigi</span></li>
-        <li><span class="card-basic-info">Exemple</span><span class="card-basic-result">du text opif</span></li>
+        <li><span class="card-basic-info">Mon equipe</span><span class="card-basic-result">Team THP</span></li>
+        <li><span class="card-basic-info">Team MVP</span><span class="card-basic-result">Charles</span></li>
+        <li><span class="card-basic-info">Top Game</span><span class="card-basic-result">Fifa 18</span></li>
+        <li><span class="card-basic-info">Total gains</span><span class="card-basic-result">500.00€</span></li>
+        <li><span class="card-basic-info">Next event</span><span class="card-basic-result">Lyon - Fifa 18</span></li>
+        <li><span class="card-basic-info">Sample</span><span class="card-basic-result">exemple</span></li>
+        <li><span class="card-basic-info">Sample</span><span class="card-basic-result">5</span></li>
+
       </ul>
     </div>
-    <!-- <p id="notice"><%= notice %></p>
-    <%= link_to 'Back', root_path %> -->
-  </div>
-  <div class="back">
-    <div class="special-gamer-card-back">
-      <div class="header-card-back">
-        <h2>@Player.name</h2>
-      </div>
-      <div class="graph-card">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcp75b2qfsNwI8zWwuctigcRbin-wMn158USAG4PDmCqMO6vTg7w" alt="">
-      </div>
-      <div class="contact-card">
-        <%= link_to 'Follow', root_path %>
-      </div>
-    </div>
-  </div>
-  </div>
+    <p id="notice"><%= notice %></p>
+    <%= link_to 'Back', root_path %>
 </div>
+
 
 <style media="screen">
   .special-gamer-card{
@@ -83,6 +63,12 @@
   .special-gamer-card .header-card{
     justify-content: center;
     background: url("https://image.noelshack.com/fichiers-md/2017/13/1490715864-5436-card-communaute.jpg") center center;
+    background-size: cover;
+    padding-top: 70px;
+  }
+  .special-gamer-card .header-card-user{
+    justify-content: center;
+    background: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center center;
     background-size: cover;
     padding-top: 70px;
   }
