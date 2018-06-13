@@ -16,39 +16,17 @@ class DatasController < ApplicationController
         event = Event.new
       end
       1.upto(ws.num_cols - 1) do |col|
-        # byebug
         col_name_sym = Event.column_names[col + 2].to_sym
         event.attributes = { col_name_sym => ws[row, col] }
-        # byebug
-        # case col
-        # when 1
-        #   event.name = ws[row, col]
-        # when 2
-        #   event.image = ws[row, col]
-        # when 3
-        #   event.date = ws[row, col]
-        # when 4
-        #   event.attendee = ws[row, col]
-        # when 5
-        #   event.place = ws[row, col]
-        # when 6
-        #   else
-        #     event.game = ws[row, col]
-        #   end
-        # else
-        #   event.style = ws[row, col]
-        # end
       end
       if Game.where(name: ws[row, 7]).exists?
         if event.games.find_by(name: ws[row, 7]).nil?
-          # byebug
           event.games << Game.find_by_name(ws[row, 7])
         end
       end
-      # byebug
-      event.save!
+      event.save
     end
-    redirect_to events_path
+    # redirect_to events_path
   end
 
   def save_data_player(worksheet)
