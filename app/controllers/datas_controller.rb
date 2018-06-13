@@ -90,29 +90,31 @@ class DatasController < ApplicationController
       else
         game = Game.new
       end
-      1.upto(ws.num_cols) do |col|
-        case col
-        when 1
-          game.name = ws[row, col]
-        when 2
-          game.style = ws[row, col]
-        when 3
-          game.avg_view_rk = ws[row, col]
-        when 4
-          game.pk_view_rk = ws[row, col]
-        when 5
-          game.avg_chan_rk = ws[row, col]
-        when 6
-          game.pk_chan_rk = ws[row, col]
-        when 7
-          game.watch_time = ws[row, col]
-        when 8
-          game.max_view = ws[row, col]
-        when 9
-          game.avg_view = ws[row, col]
-        else
-          game.ratio = ws[row, col]
-        end
+      0.upto(ws.num_cols) do |col|
+        game.column_name[col + 1] = ws[row, col]
+
+        # case col
+        # when 1
+        #   game.name = ws[row, col]
+        # when 2
+        #   game.style = ws[row, col]
+        # when 3
+        #   game.avg_view_rk = ws[row, col]
+        # when 4
+        #   game.pk_view_rk = ws[row, col]
+        # when 5
+        #   game.avg_chan_rk = ws[row, col]
+        # when 6
+        #   game.pk_chan_rk = ws[row, col]
+        # when 7
+        #   game.watch_time = ws[row, col]
+        # when 8
+        #   game.max_view = ws[row, col]
+        # when 9
+        #   game.avg_view = ws[row, col]
+        # else
+        #   game.ratio = ws[row, col]
+        # end
       end
       game.save
     end
@@ -138,23 +140,23 @@ class DatasController < ApplicationController
 
   def save_ws_on_db
     worksheet = {
-    'ws_num' => 0,
-    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+      'ws_num' => 0,
+      'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
     }
     case params[:save_id]
     when '1'
-      sava_data_event(worksheet)
+      save_data_event(worksheet)
     when '2'
-      worksheet['ws_num'] = 1
-      sava_data_player(worksheet)
+      worksheet[:ws_num] = 1
+      save_data_player(worksheet)
     when '3'
-      worksheet['ws_num'] = 2
-      sava_data_game(worksheet)
+      worksheet[:ws_num] = 2
+      save_data_game(worksheet)
     else
       # flash alert bug
       return
     end
     # add a flash alert
-    redirect_to show_data_event_path   
+    redirect_to show_data_event_path
   end
 end

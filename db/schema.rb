@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_12_085949) do
+ActiveRecord::Schema.define(version: 2018_06_13_161308) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -54,9 +54,6 @@ ActiveRecord::Schema.define(version: 2018_06_12_085949) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "style"
-    t.string "picture"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "avg_view_rk"
     t.string "pk_view_rk"
     t.string "avg_chan_rk"
