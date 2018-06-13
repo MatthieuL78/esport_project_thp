@@ -10,6 +10,7 @@ class DatasController < ApplicationController
   def save_data_event(worksheet)
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
+      # DRY have the same column for name on spreadsheet
       if Event.where(name: ws[row, 1]).exists?
         event = Event.find_by_name(ws[row, 1])
       else
@@ -34,6 +35,7 @@ class DatasController < ApplicationController
     i = 10
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
+      # DRY have the same column for name on spreadsheet
       if Player.where(nickname: ws[row, 3]).exists?
         player = Player.find_by_nickname(ws[row, 3])
       else
@@ -50,12 +52,12 @@ class DatasController < ApplicationController
     end
     # redirect_to players_path
   end
-  
 
   def save_data_game(worksheet)
     ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       ws[row, 1] = replace_underscore_by_space(ws[row, 1])
+      # DRY have the same column for name on spreadsheet
       if Game.where(name: ws[row, 1]).exists?
         game = Game.find_by_name(ws[row, 1])
       else
@@ -94,6 +96,7 @@ class DatasController < ApplicationController
       'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
     }
     case params[:save_id]
+    # The ideal is to have 1 function save_data DRY
     when '1'
       save_data_event(worksheet)
     when '2'
