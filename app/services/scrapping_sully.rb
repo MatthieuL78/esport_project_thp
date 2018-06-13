@@ -76,7 +76,7 @@ end
 
 def main_game
   # Add the following information :
-  my_game = 'Tekken_7'
+  my_game = 'Street_Fighter_V'
   my_style = 'combat'
   # End
   row_max = 2
@@ -84,7 +84,7 @@ def main_game
   opts = {
     headless: true
   }
-
+  
   if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
     opts.merge!( options: {binary: chrome_bin})
   end   

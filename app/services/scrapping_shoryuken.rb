@@ -71,7 +71,7 @@ end
 
 def main_player
   # Add the following information :
-  my_game = 'T7'
+  my_game = 'SF5'
   style = 'combat'
   my_country = 'france'
   # End
@@ -80,10 +80,15 @@ def main_player
   opts = {
     headless: true
   }
-
+  
+  if Rails.env.production?
   if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
     opts.merge!( options: {binary: chrome_bin})
   end 
+  else
+    chrome_bin = '/usr/bin/google-chrome'
+    opts.merge!( options: {binary: chrome_bin})
+  end
 
   url = my_url_player(my_country, my_game)
   browser = Watir::Browser.new :chrome, opts
