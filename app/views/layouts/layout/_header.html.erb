@@ -47,10 +47,15 @@
       <li><%= link_to "Classement", classement_ranking_path %></li>
 
       <% if player_signed_in? || sponsor_signed_in? %>
-      <li><%= link_to "Edit", edit_sponsor_registration_path %></li>
+      <li><%= link_to "Profil", profil_path %></li>
       <li><%= link_to "Partenaire", partenaire_sponsor_path %></li>
+      <li></li>
+      <li></li>
       <li><%= link_to "Deconnexion", destroy_player_session_path, method: :delete %>
+
       <% else %>
+      <li></li>
+      <li></li>
       <li><%= link_to "Connexion", new_player_session_path %></li>
       <% end %>
     </ul>

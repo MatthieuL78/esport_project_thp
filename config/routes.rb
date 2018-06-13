@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  root 'home#index'
 
   get 'partenaire/sponsor'
-  root 'home#index'
+  get 'home/profil-user', to: 'home#profil-user', as: 'profil'
 
   get 'classement/ranking', to: 'classement#ranking'
   get 'classement/fullranking', to: 'classement#fullranking'

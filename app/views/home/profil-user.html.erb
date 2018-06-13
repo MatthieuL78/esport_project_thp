@@ -2,12 +2,11 @@
   <div class="flipper">
     <div class="front">
     <div class="header-card">
-      <%= link_to 'Follow', root_path, class: "follow" %>
-      <img src="https://www.torcedores.com/content/uploads/2017/04/13355510_288240618182892_42057519_n1.jpg" class="gamer-photo-card" alt="">
+      <%= image_tag (current_sponsor.avatar.thumb.url), class: "gamer-photo-card" %>
       <div class="about-card">
         <ul class="player-info" >
           <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" alt="" class="flag"></li>
-          <li>@Player.name</li>
+          <li><p><%= current_sponsor.email %></p></li>
         </ul>
         <ul class="reseaux-sociaux">
           <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
