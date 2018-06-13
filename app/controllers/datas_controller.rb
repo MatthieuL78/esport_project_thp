@@ -9,7 +9,7 @@ class DatasController < ApplicationController
 
   def save_data_event(worksheet)
     ws = init_session(worksheet)
-    2.upto(ws.num_rows) do |row|
+    2.upto(ws.num_rows - 1) do |row|
       # DRY have the same column for name on spreadsheet
       if Event.where(name: ws[row, 1]).exists?
         event = Event.find_by_name(ws[row, 1])

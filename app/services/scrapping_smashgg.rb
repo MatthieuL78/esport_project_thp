@@ -37,12 +37,12 @@ def scrap_event(url, browser, game, style, nb_of_event, row_max)
     'tr_date' => [],
     'tr_attend' => [],
     'tr_place' => [],
-    'tr_game' => [],
-    'tr_style' => []
+    'tr_style' => [],
+    'tr_game' => []
   }
 
   worksheet = {
-    'titles' => ['Title', 'Image', 'Date', 'Attend', 'Place', 'Game', 'Style'],
+    'titles' => ['Title', 'Image', 'Date', 'Attend', 'Place', 'Style', 'Game'],
     'ws_num' => 0,
     'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
