@@ -17,4 +17,5 @@ Exmples de tâches : CRUD sponsor, joueur, game, event.
 # Front: Geraldy, Thomas
 
 Exeples de tâches pour Thomas: Conceptions de maquettes design, experience user.
+
 Exemples de tâches pour Geralady: Retranscrire les maquettes en lignes de codes.
