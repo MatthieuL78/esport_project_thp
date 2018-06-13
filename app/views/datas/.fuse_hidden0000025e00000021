@@ -1,0 +1,11 @@
+<h1>Partie Admin !</h1>
+<br/>
+<br/>
+<br/>
+<p><%= button_to 'Scrapping Event', scrapp_id: 1, action: 'scrapp_datas' %></p>
+<p><%= button_to 'Scrapping Player', scrapp_id: 2, action: 'scrapp_datas' %></p>
+<p><%= button_to 'Scrapping Game', scrapp_id: 3, action: 'scrapp_datas' %></p>
+<br/>
+<p><%= button_to 'Save data Event', save_id: 1, action: 'save_ws_on_db' %></p>
+<p><%= button_to 'Save data Player', save_id: 2, action: 'save_ws_on_db' %></p>
+<p><%= button_to 'Save data Game', save_id: 3, action: 'save_ws_on_db' %></p>
