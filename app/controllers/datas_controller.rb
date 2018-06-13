@@ -55,25 +55,27 @@ class DatasController < ApplicationController
         player = Player.create!(email: 'jack@jack' + i.to_s + '.com', password: Devise.friendly_token.first(8))
       end
       1.upto(ws.num_cols) do |col|
-        case col
-        when 1
-          player.index_country = ws[row, col]
-        when 2
-          player.index_inter = ws[row, col]
-        when 3
-          player.nickname = ws[row, col]
-        when 4
-          # We have to change when we will create team
-          player.team = ws[row, col]
-        when 5
-          player.character = ws[row, col]
-        when 6
-          player.actual_score = ws[row, col]
-        when 7
-          player.tournament = ws[row, col]
-        else
-          player.country = ws[row, col]
-        end
+        col_name_sym = Player.column_names[col + 19].to_sym
+        player.attributes = { col_name_sym => ws[row, col] }
+        # case col
+        # when 1
+        #   player.index_country = ws[row, col]
+        # when 2
+        #   player.index_inter = ws[row, col]
+        # when 3
+        #   player.nickname = ws[row, col]
+        # when 4
+        #   # We have to change when we will create team
+        #   player.team = ws[row, col]
+        # when 5
+        #   player.character = ws[row, col]
+        # when 6
+        #   player.actual_score = ws[row, col]
+        # when 7
+        #   player.tournament = ws[row, col]
+        # else
+        #   player.country = ws[row, col]
+        # end
       end
       player.save
       i += 1
@@ -91,39 +93,8 @@ class DatasController < ApplicationController
         game = Game.new
       end
       1.upto(ws.num_cols) do |col|
-        
-        # byebug
-        a = Game.column_names[col].to_sym
-        # game.attributes = Game.column_names[col + 1].to_sym 
-        game.attributes = { a => ws[row, col] }
-
-        # Il faut faire : game.attributes[:Game.column_names[col + 1].to_sym] pour 
-        # appeler correctement le nom de la colonne
-        # column_name = Game.column_name[col + 1]
-        # game.column_name = ws[row, col]
-
-        # case col
-        # when 1
-        #   game.name = ws[row, col]
-        # when 2
-        #   game.style = ws[row, col]
-        # when 3
-        #   game.avg_view_rk = ws[row, col]
-        # when 4
-        #   game.pk_view_rk = ws[row, col]
-        # when 5
-        #   game.avg_chan_rk = ws[row, col]
-        # when 6
-        #   game.pk_chan_rk = ws[row, col]
-        # when 7
-        #   game.watch_time = ws[row, col]
-        # when 8
-        #   game.max_view = ws[row, col]
-        # when 9
-        #   game.avg_view = ws[row, col]
-        # else
-        #   game.ratio = ws[row, col]
-        # end
+        col_name_sym = Game.column_names[col].to_sym
+        game.attributes = { col_name_sym => ws[row, col] }
       end
       game.save
     end

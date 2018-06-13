@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_161308) do
+ActiveRecord::Schema.define(version: 2018_06_13_192649) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 2018_06_13_161308) do
     t.string "first_name"
     t.string "picture"
     t.text "description"
-    t.string "nickname"
     t.date "date_of_birth"
     t.integer "phone"
     t.boolean "status"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(version: 2018_06_13_161308) do
     t.datetime "updated_at", null: false
     t.string "index_country"
     t.string "index_inter"
+    t.string "nickname"
     t.string "team"
     t.string "character"
     t.string "actual_score"
