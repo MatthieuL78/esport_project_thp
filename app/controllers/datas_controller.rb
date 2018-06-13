@@ -46,9 +46,12 @@ class DatasController < ApplicationController
   end
 
   def save_data_from_spreadsheet_player
-    i = 10
-    session = GoogleDrive::Session.from_config('config.json')
-    ws = session.spreadsheet_by_key('161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY').worksheets[1]
+    i = 100
+    worksheet = {
+    'ws_num' => 1,
+    'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
+    }
+    ws = init_session(worksheet)
     2.upto(ws.num_rows) do |row|
       if Player.where(nickname: ws[row, 3]).exists?
         player = Player.find_by_nickname(ws[row, 3])
