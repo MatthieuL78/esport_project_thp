@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_163054) do
+ActiveRecord::Schema.define(version: 2018_06_14_122419) do
 
   create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "attendee"
-    t.string "game"
-    t.string "style"
-    t.string "image"
+    t.string "name"
+    t.string "picture"
     t.string "date"
+    t.string "attendee"
+    t.string "place"
+    t.string "style"
+    t.string "game"
   end
 
   create_table "events_games", force: :cascade do |t|
@@ -52,18 +52,17 @@ ActiveRecord::Schema.define(version: 2018_06_13_163054) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.string "style"
-    t.string "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avg_view_rk"
-    t.string "pk_view_rk"
-    t.string "avg_chan_rk"
-    t.string "pk_chan_rk"
+    t.string "name"
+    t.string "style"
+    t.string "view_rk_avg"
+    t.string "view_rk_max"
+    t.string "chan_rk_avg"
+    t.string "chan_rk_max"
     t.string "watch_time"
-    t.string "max_view"
-    t.string "avg_view"
+    t.string "viewer_max"
+    t.string "viewer_avg"
     t.string "ratio"
   end
 
@@ -85,33 +84,31 @@ ActiveRecord::Schema.define(version: 2018_06_13_163054) do
     t.index ["sponsor_id"], name: "index_games_sponsors_on_sponsor_id"
   end
 
-  create_table "players", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+  create_table "players", id: false, force: :cascade do |t|
+    t.integer "test"
+    t.string "email"
+    t.string "encrypted_password"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.string "last_name"
     t.string "first_name"
     t.string "picture"
     t.text "description"
-    t.string "nickname"
     t.date "date_of_birth"
     t.integer "phone"
     t.boolean "status"
-    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "index_country"
-    t.string "index_inter"
+    t.string "rk_country"
+    t.string "rk_inter"
+    t.string "nickname"
     t.string "team"
     t.string "character"
     t.string "actual_score"
-    t.string "tournament"
+    t.string "nb_tournament"
     t.string "country"
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
@@ -143,9 +140,9 @@ ActiveRecord::Schema.define(version: 2018_06_13_163054) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
     t.string "username"
     t.string "description"
+    t.string "avatar"
     t.index ["email"], name: "index_sponsors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_sponsors_on_reset_password_token", unique: true
   end
