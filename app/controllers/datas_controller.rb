@@ -17,7 +17,7 @@ class DatasController < ApplicationController
         event = Event.new
       end
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Event.column_names[col + 2].to_sym
+        col_name_sym = Event.column_names[col].to_sym
         event.attributes = { col_name_sym => ws[row, col] }
       end
       if Game.where(name: ws[row, 7]).exists?
@@ -63,7 +63,7 @@ class DatasController < ApplicationController
         game = Game.new
       end
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Game.column_names[col + 2].to_sym
+        col_name_sym = Game.column_names[col]
         game.attributes = { col_name_sym => ws[row, col] }
       end
       game.save
