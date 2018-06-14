@@ -27,7 +27,6 @@ class DatasController < ApplicationController
       end
       event.save
     end
-    # redirect_to events_path
   end
 
   def save_data_player(worksheet)
@@ -51,7 +50,6 @@ class DatasController < ApplicationController
       player.save
       i += 1
     end
-    # redirect_to players_path
   end
 
   def save_data_game(worksheet)
@@ -70,7 +68,6 @@ class DatasController < ApplicationController
       end
       game.save
     end
-    # redirect_to games_path
   end
 
   # Function for scrapping
