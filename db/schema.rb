@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_183441) do
+ActiveRecord::Schema.define(version: 2018_06_14_190728) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -102,17 +102,16 @@ ActiveRecord::Schema.define(version: 2018_06_14_183441) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "rk_country"
-    t.string "rk_inter"
-    t.string "nb_tournament"
     t.string "index_country"
     t.string "index_inter"
     t.string "nickname"
     t.string "team"
     t.string "character"
     t.string "actual_score"
-    t.string "nb_tournmanet"
+    t.string "nb_tournament"
     t.string "country"
+    t.datetime "created_at", default: "2018-06-14 19:07:57", null: false
+    t.datetime "updated_at", default: "2018-06-14 19:07:57", null: false
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
