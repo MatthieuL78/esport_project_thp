@@ -2,7 +2,7 @@ class GamesUpdateScrapp < ActiveRecord::Migration[5.2]
   def change
   	remove_column :games, :name
     remove_column :games, :style
-    remove_column :games, :picture
+    # remove_column :games, :picture
     remove_column :games, :avg_view_rk
   	remove_column :games, :pk_view_rk
   	remove_column :games, :avg_chan_rk
