@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
-# Initialization Spreadsheet
-def init_spreadsheet(worksheet_hash)
+# Initialization Session
+def init_session(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
   ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
+end
+
+# Initialization Spreadsheet
+def init_spreadsheet(worksheet_hash)
+  ws = init_session(worksheet_hash)
   worksheet_hash['titles'].each_with_index { |title_value, index| ws[1, index + 1] = title_value }
   ws
 end

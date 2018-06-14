@@ -2,10 +2,10 @@
 
 class DeviseCreatePlayers < ActiveRecord::Migration[5.2]
   def change
-    create_table :players do |t|
+    change_table :players do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email
+      t.string :encrypted_password
 
       ## Recoverable
       t.string   :reset_password_token
@@ -22,7 +22,7 @@ class DeviseCreatePlayers < ActiveRecord::Migration[5.2]
       t.boolean :status
 
       ## Rememberable
-      t.datetime :remember_created_at
+      # t.datetime :remember_created_at
 
       ## Trackable
       t.integer  :sign_in_count, default: 0, null: false
@@ -42,7 +42,7 @@ class DeviseCreatePlayers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.timestamps null: false
+      # t.timestamps
     end
 
     add_index :players, :email,                unique: true

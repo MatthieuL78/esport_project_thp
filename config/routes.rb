@@ -17,12 +17,7 @@ Rails.application.routes.draw do
   resources :events
 
   get 'show_data', to: 'datas#show_data', as: 'show_data_event'
-  post 'show_data_event', to: 'datas#scrapp_events', as: 'scrapp_events'
-  post 'show_data_player', to: 'datas#scrapp_players', as: 'scrapp_players'
-  post 'show_data_game', to: 'datas#scrapp_games', as: 'scrapp_games'
-  post 'show_data_event_save', to: 'datas#save_data_from_spreadsheet_event', as: 'save_events'
-  post 'show_data_player_save', to: 'datas#save_data_from_spreadsheet_player', as: 'save_players'
-  post 'show_data_game_save', to: 'datas#save_data_from_spreadsheet_game', as: 'save_games'
-
+  post 'scrapp_data/:scrapp_id', to: 'datas#scrapp_datas', as: 'scrapp_datas'
+  post 'save_data/:save_id', to: 'datas#save_ws_on_db', as: 'save_events'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

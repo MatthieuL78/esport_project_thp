@@ -76,21 +76,13 @@ end
 
 def main_game
   # Add the following information :
-  my_game = 'Tekken_7'
+  my_game = 'Street_fighter_V'
   my_style = 'combat'
   # End
   row_max = 2
 
-  opts = {
-    headless: true
-  }
-
-  if (chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil))
-    opts.merge!( options: {binary: chrome_bin})
-  end   
-
   url = my_url_game(my_game)
-  browser = Watir::Browser.new :chrome, opts
+  browser = Watir::Browser.new :chrome, scrapping_options
   scrap_game(url, browser, my_game, my_style, row_max)
   row_max += 100
 end

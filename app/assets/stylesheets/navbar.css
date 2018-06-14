@@ -10,8 +10,8 @@ nav{
 nav div{
   flex: 1;
 }
-.logo img{
- width: 70px;
+.logo .lizard{
+ width: 40px;
 }
 nav ul{
   margin: 0;

@@ -12,7 +12,8 @@ dark grey rgba(90,90,90,1);
  }
  html,body{
    font-family: 'Oswald', sans-serif;
-   width: 100%;
+	width: 100%;
+	background-color: rgba(31, 31, 81,1);
  }
  /* permet de rendre le menu hamburger fonctionnel */
 .fixed{
@@ -121,7 +122,6 @@ footer p{
      width: 140px;
      border-radius: 4px;
    }
-
    .menuapp li{
      border-bottom: 1px solid #DDD;
      text-align: center;
@@ -201,26 +201,28 @@ footer p{
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top:50px;
   margin-bottom:30px;
   flex-wrap: wrap;
+  flex-basis: 100%;
  }
-
- .section .article img{
-  width: 100%;
+.regule{
+   height: 58px;
  }
  .section .article{
   width: 100%;
   border: 1px solid #EEE;
   margin: 10px auto 0 auto;
-
+  box-sizing: border-box;
  }
  .section .article p{
    font-weight: lighter;
  }
- .section .article span{
-   text-decoration: underline;
+ .section .article .link-to{
+   background-color: rgba(206, 251, 95,1);
+   padding: 0 10px;
+   box-shadow: 0 0px 5px 0px;
  }
+
  @media (min-width: 725px) {
   .section{
     display: flex;
