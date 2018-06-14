@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_190728) do
+ActiveRecord::Schema.define(version: 2018_06_14_192206) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 2018_06_14_190728) do
     t.string "actual_score"
     t.string "nb_tournament"
     t.string "country"
-    t.datetime "created_at", default: "2018-06-14 19:07:57", null: false
-    t.datetime "updated_at", default: "2018-06-14 19:07:57", null: false
+    t.datetime "created_at", default: "2018-06-14 19:24:53", null: false
+    t.datetime "updated_at", default: "2018-06-14 19:24:53", null: false
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
