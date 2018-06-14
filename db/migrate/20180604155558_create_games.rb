@@ -1,10 +1,9 @@
 class CreateGames < ActiveRecord::Migration[5.2]
   def change
-    create_table :games do |t|
+    change_table :games do |t|
       t.string :name
       t.string :type
       t.string :picture
-      t.timestamps
     end
   end
 end

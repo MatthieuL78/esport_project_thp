@@ -16,7 +16,7 @@ class DatasController < ApplicationController
       else
         event = Event.new
       end
-      1.upto(ws.num_cols - 1) do |col|
+      1.upto(ws.num_cols) do |col|
         col_name_sym = Event.column_names[col + 2].to_sym
         event.attributes = { col_name_sym => ws[row, col] }
       end
@@ -41,10 +41,11 @@ class DatasController < ApplicationController
       else
         # To delete for the real version of the app
         # Because we will use an other table for the scrapping
-        player = Player.create!(email: 'jack@jack' + i.to_s + '.com', password: Devise.friendly_token.first(8))
+        player = Player.new(email: 'jack@jack' + i.to_s + '.com', password: Devise.friendly_token.first(8))
       end
+
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Player.column_names[col + 19].to_sym
+        col_name_sym = Player.column_names[col + 16].to_sym
         player.attributes = { col_name_sym => ws[row, col] }
       end
       player.save
@@ -64,7 +65,7 @@ class DatasController < ApplicationController
         game = Game.new
       end
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Game.column_names[col].to_sym
+        col_name_sym = Game.column_names[col + 2].to_sym
         game.attributes = { col_name_sym => ws[row, col] }
       end
       game.save
