@@ -5,7 +5,7 @@ class PlayerTournamentBis < ActiveRecord::Migration[5.2]
 	remove_column :players, :updated_at
 
 	change_table :players do |t|
-      t.string :nb_tournament
+      #t.string :nb_tournament
       t.string :country
       t.timestamps default: Time.now   
 	end
