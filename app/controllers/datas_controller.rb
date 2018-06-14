@@ -44,7 +44,12 @@ class DatasController < ApplicationController
       end
 
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Player.column_names[col + 16].to_sym
+        # pansement ...
+        if Rails.env.production?
+          col_name_sym = Player.column_names[col + 8].to_sym
+        else
+          col_name_sym = Player.column_names[col + 16].to_sym
+        end
         player.attributes = { col_name_sym => ws[row, col] }
       end
       player.save
