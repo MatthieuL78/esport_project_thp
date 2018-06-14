@@ -63,7 +63,7 @@ class DatasController < ApplicationController
         game = Game.new
       end
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Game.column_names[col]
+        col_name_sym = Game.column_names[col].to_sym
         game.attributes = { col_name_sym => ws[row, col] }
       end
       game.save
