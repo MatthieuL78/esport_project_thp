@@ -46,7 +46,7 @@ class DatasController < ApplicationController
       1.upto(ws.num_cols) do |col|
         # pansement ...
         if Rails.env.production?
-          col_name_sym = Player.column_names[col + 15].to_sym
+          col_name_sym = Player.column_names[col + 17].to_sym
         else
           col_name_sym = Player.column_names[col + 16].to_sym
         end
