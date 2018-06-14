@@ -1,26 +1,49 @@
-<h2>Log in</h2>
+<div id="main-content">
+  <div id="wrapper1">
+    <div id="regule-nav-devise"></div>
+    <h1>Connexion</h1>
+    <h2>Espace Sponsor</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+
+    <%= render "sponsors/shared/links" %>
+
+    <div class="">
+      <p class="span-text">Compte Gamer<p>
+      <a href="#wrapper2" class="arrow"></a>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
 
-<%= render "sponsors/shared/links" %>
+  <hr>
+  <div id="wrapper2">
+    <div id="regule-nav-devise"></div>
+    <h2>Espace gamer</h2>
+    <%= image_tag('https://media.eventhubs.com/static/images/eventhubslogo1.png') %>
+    <p>Lorem ipsum dolor sit ame magna aco laboris nisi ut dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="btn-call">
+      <%= link_to "Connexion", player_session_path %>
+    </div>
+  </div>
+
+</div>

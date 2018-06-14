@@ -1,3 +1,60 @@
 // Place all the styles related to the partenaire controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* partenaire */
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ADA996;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.regule-partenaire-header{
+  display: block;
+  background-color: rgba(191, 55, 105,1);
+  width: 100%;
+  color: #FFF;
+  font-style: italic;
+  padding-top: 60px;
+  padding-left: 15px;
+}
+.partenaire{
+  display: flex;
+  margin: 5px;
+}
+.partenaire-inner{
+  width: 100%;
+  padding: 10px;
+  background: #EEE;
+}
+.partenaire-inner img{
+  width: 100%;
+}
+.partenaire-info{
+  display: flex;
+}
+.partenaire-info h3{
+  flex: 1;
+}
+.social li{
+  display: inline;
+}
+.partenaire-contact .social img{
+  width: 20px;
+}
+@media (min-width: 725px) {
+
+  .content{
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-around;
+  }
+ .partenaire{
+   flex-basis:40%;
+ }
+ footer{
+   position:inherit;
+ }
+}

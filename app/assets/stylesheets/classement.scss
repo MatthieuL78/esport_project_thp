@@ -1,3 +1,53 @@
 // Place all the styles related to the classement controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.classement{
+  background: rgba(31, 31, 81,.9);
+}
+.classement-header {
+  background-image: url('https://cdn-s-www.ledauphine.com/images/532A2478-4786-4948-9219-0DE666268E71/LDL_v1_03/des-competiions-de-esport-seront-a-terme-diffusees-sur-les-antennes-de-canal-photo-archives-afp-1521731564.jpg');
+  height: 300px;
+  background-size: cover;
+  filter: blur(3px);
+}
+.top-10-title{
+  position: absolute;
+  top: 55px;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  padding: 100px 0;
+  color: #EEE;
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+}
+.classement-cover img{
+  width: 100%;
+  cursor: pointer;
+}
+.classement-cover h3{
+  font-style: italic;
+  color: #EEE;
+  padding: 5px;
+}
+.classement h2{
+  color: #EEE;
+  padding: 0;
+  margin: 0;
+  font-style: italic;
+  text-align: center;
+  text-transform: uppercase;
+  background: rgba(191, 55, 105,1);
+}
+.classement-players table{
+  width: 100%;
+  text-align: center;
+}
+.classement-players table th{
+  background: rgba(20,20,20,1);
+  color: #AAA;
+  text-transform: uppercase;
+}
+.classement-players table td{
+  color: rgba(220,220,220,1);
+}

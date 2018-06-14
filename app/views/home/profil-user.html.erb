@@ -1,0 +1,237 @@
+<div class="special-gamer-card flip-container">
+    <div class="header-card header-card-user">
+      <%= image_tag (current_sponsor.avatar.thumb.url), class: "gamer-photo-card" %>
+      <div class="about-card">
+        <ul class="player-info" >
+          <li><p><%= current_sponsor.email %></p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mid-card">
+      <ul>
+        <li><span class="card-basic-info">Mon equipe</span><span class="card-basic-result">Team THP</span></li>
+        <li><span class="card-basic-info">Team MVP</span><span class="card-basic-result">Charles</span></li>
+        <li><span class="card-basic-info">Top Game</span><span class="card-basic-result">Fifa 18</span></li>
+        <li><span class="card-basic-info">Total gains</span><span class="card-basic-result">500.00€</span></li>
+        <li><span class="card-basic-info">Next event</span><span class="card-basic-result">Lyon - Fifa 18</span></li>
+        <li><span class="card-basic-info">Sample</span><span class="card-basic-result">exemple</span></li>
+        <li><span class="card-basic-info">Sample</span><span class="card-basic-result">5</span></li>
+
+      </ul>
+    </div>
+    <p id="notice"><%= notice %></p>
+    <%= link_to 'Back', root_path %>
+</div>
+
+
+<style media="screen">
+  .special-gamer-card{
+    height: 96vh !important;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(31, 31, 81,1);
+    display: flex;
+    flex-direction: column;
+  }
+  .about-card{
+    background: rgba(0,0,0,0.6);
+    color: #FFF;
+    padding: 5px;
+  }
+  .about-card .player-info{
+    border-bottom: 1px #555 solid;
+  }
+  .about-card .player-info li{
+    margin: 10px;
+  }
+  .about-card .player-info li img{
+    width: 30px !important;
+    height: 20px !important;
+  }
+  .about-card .reseaux-sociaux{
+    border-top: 1px #222 solid;
+  }
+  .about-card .reseaux-sociaux img{
+    width: 50px;
+  }
+  .about-card h3{
+    padding: 1em 1em 0.3em 1em;
+    margin: 0 auto;
+    text-align: left;
+    width: 80%;
+  }
+  .special-gamer-card .header-card{
+    justify-content: center;
+    background: url("https://image.noelshack.com/fichiers-md/2017/13/1490715864-5436-card-communaute.jpg") center center;
+    background-size: cover;
+    padding-top: 70px;
+  }
+  .special-gamer-card .header-card-user{
+    justify-content: center;
+    background: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center center;
+    background-size: cover;
+    padding-top: 70px;
+  }
+  .special-gamer-card .header-card .follow{
+    top: 70px;
+    border: 2px solid #DDD;
+    border-radius: 35px;
+    padding: 0em 1em;
+    background: #EEE;
+    color: #111;
+    text-decoration: none;
+    position: absolute;
+    top: 70px;
+    right: 5px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,1);
+    overflow: hidden;
+  }
+  .special-gamer-card .header-card .follow:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 70%;
+      height: 100%;
+      background: rgba(255,255,255,.1);
+      transition: .5s;
+      transform: skewX(-15deg);
+  }
+  .special-gamer-card .header-card .follow:hover:before{
+      left: 210px;
+  }
+  .special-gamer-card .header-card .follow:after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -70px;
+      width: 50px;
+      height: 100%;
+      background: rgba(255,255,255,.1);
+      transition: .8s;
+      transform: skewX(-15deg);
+      transition-delay: .3s;
+  }
+  .special-gamer-card .header-card .follow:hover:after{
+      left: 210px;
+  }
+  .special-gamer-card .header-card .gamer-photo-card{
+    border-radius: 4px;
+    width: 30vh;
+  }
+  .special-gamer-card .header-card ul li{
+    display: inline;
+  }
+  .special-gamer-card .header-card .about-card .flag{
+    width: 60px;
+    border: 1px solid #fff;
+  }
+  .special-gamer-card .header-card .about-card img{
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+  }
+  .special-gamer-card .header-card .bio{
+    margin: 0 auto;
+    background-color: rgba(20,20,20,0.4);
+    border: 1px solid #EEE;
+    font-style: italic;
+    width: 80%;
+    padding: 1em;
+    font-weight: 100;
+    text-align: justify;
+  }
+  .mid-card{
+    display: flex;
+    background-color: rgba(31, 31, 81,1);
+  }
+  .mid-card ul{
+    margin: auto;
+    padding: 5px;
+    width: 80%;
+  }
+  .mid-card ul li{
+    margin: 5px;
+    display: flex;
+    -webkit-transform: skew(-20deg);
+	   -moz-transform: skew(-20deg);
+	     -o-transform: skew(-20deg);
+    font-size: 20px;
+  }
+  .mid-card .card-basic-info{
+    background: #F45;
+    flex: 1;
+    margin-right: 5px;
+  }
+  .mid-card .card-basic-result{
+    flex: 2;
+    background: #AAA;
+  }
+
+  /***************** flipping animation start*/
+  /***** back of the card start */
+  .special-gamer-card-back{
+    height: 100vh;
+    width: 100%;
+    background: rgba(31, 31, 81,.8);
+  }
+  .special-gamer-card-back .header-card-back{
+    background: rgba(31, 31, 81,.8);
+    color: #EEE;
+  }
+  .special-gamer-card-back .graph-card{
+    background: #DDD;
+  }
+  .special-gamer-card-back .contact-card{
+    margin: 10px auto;
+  }
+  .special-gamer-card-back .contact-card a{
+    padding: 5px 55px;
+    color: #222;
+    background-color: rgba(206, 251, 95,1);
+    box-shadow: 1px 1px 20px 0;
+  }
+  /***** back of the card end */
+  /* entire container, keeps perspective */
+.flip-container {
+	perspective: 600px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 100%;
+	height: 100%;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+  z-index: 3;
+}
+  /***************** flipping animation end*/
+</style>

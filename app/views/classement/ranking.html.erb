@@ -1,12 +1,10 @@
 <div class="classement">
   <div class="classement-header">
-
   </div>
-
   <div class="classement-game">
-
+    <h1 class="top-10-title">Top 10 gamer</h1>
     <div class="classement-cover">
-      <h3><%= link_to "Classement", root_path %></h3>
+      <h3><%= link_to "Classement", classement_fullranking_path %></h3>
       <img src="http://www.lepoint.fr/images/2018/04/18/14525391lpw-14526018-article-jpg_5174276.jpg" alt="">
       <div class="classement-players">
         <h2>Top 10</h2>
@@ -18,7 +16,7 @@
           </tr>
           <tr>
             <td>1</td>
-            <td>Faker</td>
+            <td><%= link_to "Faker", classement_profil_player_path %></td>
             <td>9.9</td>
           </tr>
           <tr>
@@ -201,58 +199,4 @@
     </div>
     </div>
   </div>
-
 </div>
-<style media="screen">
-body{
-  background: #333;
-}
-  .classement{
-    background: #333;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-  }
-  .classement .classement-header{
-    padding-top: 350px;
-    background: url("https://foot49.fff.fr/wp-content/uploads/sites/36/2017/11/classement_general.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  .classement-game{
-    background: #FFF;
-  }
-  .classement-cover h3{
-    background-color: rgba(191, 55, 105,1);
-    color: #FFF;
-  }
-  .classement-game .classement-cover{
-    width: 90%;
-    padding: 5px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  .classement-game img{
-    width: 100%;
-  }
-  .classement-players{
-    background: rgba(31, 31, 81,1);
-    color: #FFF;
-  }
-  .classement-players table{
-    width: 100%;
-    margin: 0;
-  }
-  .classement table tr{
-    background: #EEE;
-    color: #222;
-  }
-  .classement table th{
-    background: rgba(191, 55, 105,1);
-    color: #FFF;
-    padding: 5px;
-    font-style: italic;
-  }
-
-
-</style>
