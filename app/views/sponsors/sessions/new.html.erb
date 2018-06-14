@@ -1,6 +1,7 @@
 <div id="main-content">
-  <h1>Connexion</h1>
   <div id="wrapper1">
+    <div id="regule-nav-devise"></div>
+    <h1>Connexion</h1>
     <h2>Espace Sponsor</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
@@ -28,14 +29,15 @@
 
     <%= render "sponsors/shared/links" %>
 
-    <span class="div-arrow">
+    <div class="">
       <p class="span-text">Compte Gamer<p>
       <a href="#wrapper2" class="arrow"></a>
-    </span>
+    </div>
   </div>
 
   <hr>
   <div id="wrapper2">
+    <div id="regule-nav-devise"></div>
     <h2>Espace gamer</h2>
     <%= image_tag('https://media.eventhubs.com/static/images/eventhubslogo1.png') %>
     <p>Lorem ipsum dolor sit ame magna aco laboris nisi ut dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

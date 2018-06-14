@@ -2,6 +2,7 @@
   <div class="classement-header">
   </div>
   <div class="classement-game">
+    <h1 class="top-10-title">Top 10 gamer</h1>
     <div class="classement-cover">
       <h3><%= link_to "Classement", classement_fullranking_path %></h3>
       <img src="http://www.lepoint.fr/images/2018/04/18/14525391lpw-14526018-article-jpg_5174276.jpg" alt="">
@@ -15,7 +16,7 @@
           </tr>
           <tr>
             <td>1</td>
-            <td>Faker</td>
+            <td><%= link_to "Faker", classement_profil_player_path %></td>
             <td>9.9</td>
           </tr>
           <tr>
