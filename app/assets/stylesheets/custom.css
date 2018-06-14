@@ -201,26 +201,29 @@ footer p{
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top:50px;
   margin-bottom:30px;
   flex-wrap: wrap;
  }
-
- .section .article img{
-  width: 100%;
+ .section .regule{
+   height: 58px;
  }
  .section .article{
   width: 100%;
   border: 1px solid #EEE;
   margin: 10px auto 0 auto;
-
+  box-sizing: border-box;
  }
  .section .article p{
    font-weight: lighter;
  }
- .section .article span{
-   text-decoration: underline;
+ .section .article .link-to{
+   background-color: rgba(206, 251, 95,1);
+   padding: 0 10px;
+   box-shadow: 0 0px 5px 0px;
  }
+ .section .article
+
+
  @media (min-width: 725px) {
   .section{
     display: flex;
