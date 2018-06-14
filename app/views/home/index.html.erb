@@ -5,141 +5,41 @@
 
       <% @events.each do |event| %>
       <div class="article">
-      <%= image_tag("#{event.image}") %>
-      <h3><%= event.name %></h3>
-      <p><%= event.place %></p>
+          <div class="article-image">
+          <%= image_tag("#{event.image}") %>
+          </div>
+          <div class="article-info">
+            <h3><%= event.name %></h3>
+            <p><%= event.place %></p>
+            <p><%= event.name %></p>
+            <p><%= event.name %></p>
+            <p><%= event.name %></p>
+            <p><%= event.name %></p>
+          </div>
         </div>
       <% end %>
 
 
-    <div class="article">
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-      <li><%= link_to "Plus d'infos", root_path, class: "news" %></li>
-    </div>
-
-    <div class="article">
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-      <li><%= link_to "Plus d'infos", root_path, class: "news" %></li>
-    </div>
-
-    <div class="article">
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-      <li><%= link_to "Plus d'infos", root_path, class: "news" %></li>
-    </div>
-
-    <div class="article">
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-      <li><%= link_to "Plus d'infos", root_path, class: "news" %></li>
-    </div>
-
-    <div class="article">
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-      <li><%= link_to "Plus d'infos", root_path, class: "news" %></li>
-    </div>
-    <div class="article">
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
 
 <!-- tournanament archives -->
 <div class="past">
   <h2>past</h2>
 
-  <div class="section">
-    <div class="article">
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <h3>title</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
+  <% @events.each do |event| %>
+  <div class="article">
+      <div class="article-image">
+      <%= image_tag("#{event.image}") %>
+      </div>
+      <div class="article-info">
+        <h3><%= event.name %></h3>
+        <p><%= event.place %></p>
+        <p><%= event.name %></p>
+        <p><%= event.name %></p>
+        <p><%= event.name %></p>
+        <p><%= event.name %></p>
+      </div>
     </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
-  <div class="section">
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://smashgg.imgix.net/images/tournament/48366/image-221f011846ea4c106baf74833d29b8f3.jpg?auto=compress,format" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/headerImages/image.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-    <div class="article">
-      <h3>title</h3>
-      <img src="https://media.contentapi.ea.com/content/www-easports/en_US/madden-nfl/news/2018/young-kiv-wins-ea-sports-madden-nfl-18-bowl/_jcr_content/par/image_900304602.img.jpg" alt="">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna a</p>
-    </div>
-  </div>
+  <% end %>
+
+
 </div>
