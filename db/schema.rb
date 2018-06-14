@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_180135) do
+ActiveRecord::Schema.define(version: 2018_06_14_181916) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_06_14_180135) do
     t.string "place"
     t.string "style"
     t.string "game"
+    t.datetime "created_at", default: "2018-06-14 18:20:35", null: false
+    t.datetime "updated_at", default: "2018-06-14 18:20:35", null: false
   end
 
   create_table "events_games", force: :cascade do |t|
