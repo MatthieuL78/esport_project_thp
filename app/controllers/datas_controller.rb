@@ -89,7 +89,7 @@ class DatasController < ApplicationController
       return
     end
     # add a flash alert
-    redirect_to show_data_event_path
+    redirect_back(fallback_location: show_data_event_path)
   end
 
   # Function for save ws on db
@@ -113,6 +113,6 @@ class DatasController < ApplicationController
       return
     end
     # add a flash alert
-    redirect_to show_data_event_path
+    redirect_back(fallback_location: show_data_event_path)
   end
 end
