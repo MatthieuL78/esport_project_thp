@@ -38,9 +38,6 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# Use to check ruby good behaviour
-# gem 'rubocop'
-
 # For the model user
 gem 'devise'
 
@@ -73,7 +70,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  # Use to check memory
   gem 'derailed'
+  # Use to check ruby good behaviour
+  gem 'rubocop'
 end
 
 group :test do
