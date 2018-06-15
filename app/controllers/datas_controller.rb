@@ -68,7 +68,12 @@ class DatasController < ApplicationController
         game = Game.new
       end
       1.upto(ws.num_cols) do |col|
-        col_name_sym = Game.column_names[col].to_sym
+        # pansement ...
+        if Rails.env.development?
+          col_name_sym = Game.column_names[col + 2].to_sym
+        else
+          col_name_sym = Game.column_names[col].to_sym
+        end
         game.attributes = { col_name_sym => ws[row, col] }
       end
       game.save

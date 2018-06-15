@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
     t.string "place"
     t.string "style"
     t.string "game"
-    t.datetime "created_at", default: "2018-06-14 20:49:26", null: false
-    t.datetime "updated_at", default: "2018-06-14 20:49:26", null: false
+    t.datetime "created_at", default: "2018-06-14 18:20:35", null: false
+    t.datetime "updated_at", default: "2018-06-14 18:20:35", null: false
   end
 
   create_table "events_games", force: :cascade do |t|
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -85,9 +84,10 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
     t.index ["sponsor_id"], name: "index_games_sponsors_on_sponsor_id"
   end
 
-  create_table "players", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+  create_table "players", id: false, force: :cascade do |t|
+    t.integer "test"
+    t.string "email"
+    t.string "encrypted_password"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.string "last_name"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
     t.date "date_of_birth"
     t.integer "phone"
     t.boolean "status"
-    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -111,8 +110,8 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
     t.string "actual_score"
     t.string "nb_tournament"
     t.string "country"
-    t.datetime "created_at", default: "2018-06-14 20:49:27", null: false
-    t.datetime "updated_at", default: "2018-06-14 20:49:27", null: false
+    t.datetime "created_at", default: "2018-06-14 19:24:53", null: false
+    t.datetime "updated_at", default: "2018-06-14 19:24:53", null: false
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
@@ -143,9 +142,9 @@ ActiveRecord::Schema.define(version: 2018_06_14_192206) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
     t.string "username"
     t.string "description"
+    t.string "avatar"
     t.index ["email"], name: "index_sponsors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_sponsors_on_reset_password_token", unique: true
   end
