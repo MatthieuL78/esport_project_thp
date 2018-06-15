@@ -107,6 +107,7 @@ GEM
       rack-cors
       rails (>= 4.0)
       useragent
+    get_process_mem (0.2.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-api-client (0.21.2)
@@ -185,6 +186,9 @@ GEM
     powerpack (0.1.1)
     public_suffix (3.0.2)
     puma (3.11.4)
+    puma_worker_killer (0.1.0)
+      get_process_mem (~> 0.2)
+      puma (>= 2.7, < 4)
     rack (2.0.5)
     rack-cors (1.0.2)
     rack-test (1.0.0)
@@ -317,6 +321,7 @@ DEPENDENCIES
   mini_magick
   pg (= 0.20.0)
   puma (~> 3.11)
+  puma_worker_killer
   rails (~> 5.2.0)
   rubocop
   sass-rails (~> 5.0)
@@ -334,4 +339,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
