@@ -10,7 +10,7 @@
         <div class="article-info">
           <h3><%= event.name %></h3>
           <p><%= event.game.capitalize %></p>
-          <p><%= event.style %></p>
+          <p><%= event.date %></p>
           <p>Lieu: <%= event.place %></p>
           <p>Nombre de participant: <%= event.attendee %></p>
           <p class="link-to"><%= link_to "Plus d'info", root_path %></p>
@@ -32,7 +32,7 @@
     <div class="article-info">
       <h3><%= event.name %></h3>
       <p><%= event.game.capitalize %></p>
-      <p><%= event.style %></p>
+      <p><%= event.date %></p>
       <p>Lieu: <%= event.place %></p>
       <p>Nombre de participant: <%= event.attendee %></p>
       <p class="link-to"><%= link_to "Plus d'info", root_path %></p>
