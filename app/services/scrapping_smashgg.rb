@@ -42,7 +42,7 @@ def scrap_event(url, browser, game, style, nb_of_event, row_max)
   }
 
   worksheet = {
-    'titles' => ['Title', 'Image', 'Date', 'Attend', 'Place', 'Style', 'Game'],
+    'titles' => %w[Title Image Date Attend Place Style Game],
     'ws_num' => 0,
     'ws_url' => '161w9F2_0vwwRpfr4ggATvXL0J_xUW83-Q7Y5IffgyWY'
   }
@@ -119,7 +119,6 @@ def scrap_event(url, browser, game, style, nb_of_event, row_max)
     data['tr_style'] << style
   end
   data_to_excel(data, worksheet, row_max)
-
 end
 
 # Scraping data on smash GG for : Tournament
@@ -144,11 +143,11 @@ def main_event
   @nb_event_integer = my_nb_event.to_i
 
   # while @nb_event_integer.positive?
-    my_nb_event = '100'
-    my_page += 1
-    @nb_event_integer -= 100
-    url = my_url_event(my_nb_event, my_page.to_s)
-    scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
-    row_max += 100
+  my_nb_event = '100'
+  my_page += 1
+  @nb_event_integer -= 100
+  url = my_url_event(my_nb_event, my_page.to_s)
+  scrap_event(url, browser, my_game, style, my_nb_event.to_i, row_max)
+  row_max += 100
   # end
 end

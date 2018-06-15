@@ -76,7 +76,7 @@ def main_player
   my_country = 'france'
   # End
   row_max = 2
-
+  # Add a while for many pages ...
   url = my_url_player(my_country, my_game)
   browser = Watir::Browser.new :chrome, scrapping_options
   scrap_player(url, browser, my_game, style, row_max)

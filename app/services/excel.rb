@@ -3,7 +3,7 @@
 # Initialization Session
 def init_session(worksheet_hash)
   session = GoogleDrive::Session.from_config('config.json')
-  ws = session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
+  session.spreadsheet_by_key(worksheet_hash['ws_url']).worksheets[worksheet_hash['ws_num']]
 end
 
 # Initialization Spreadsheet
