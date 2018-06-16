@@ -2,28 +2,29 @@
   <div class="flipper">
     <div class="front">
     <div class="header-card">
-      <%= link_to 'Follow', root_path, class: "follow" %>
       <img src="http://genknews.genkcdn.vn/2017/photo-0-1512040440234.jpg" class="gamer-photo-card" alt="">
       <div class="about-card">
-        <ul class="player-info" >
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/900px-Flag_of_South_Korea.svg.png" alt="" class="flag"></li>
-          <li>Faker</li>
-        </ul>
-        <ul class="reseaux-sociaux">
+        <div class="player-info">
+          <h2>Faker</h2>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/900px-Flag_of_South_Korea.svg.png" alt="" class="flag">
+        </div>
+        <div class="reseaux-sociaux">
+        <ul>
           <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-facebook-128.png" alt=""> </li>
           <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" alt=""> </li>
           <li><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/youtube-128.png" alt=""> </li>
         </ul>
+        </div>
         <h3>Faker Nindô:</h3>
-        <p class="bio">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+        <p class="bio">J'ai eu mon temps sur League of Legends, il est l'heure de laisser la main à la nouvelle génération. Aujourd'hui, j'ai envie d'expérimenter d'autres domaines, et pourquoi pas devenir à nouveau le meilleur.</p>
       </div>
     </div>
     <div class="mid-card">
       <ul>
         <li><span class="card-basic-info">Classement</span><span class="card-basic-result">1</span></li>
-        <li><span class="card-basic-info">Record</span><span class="card-basic-result">top 8 a Tekken world tour</span></li>
-        <li><span class="card-basic-info">Rival</span><span class="card-basic-result">Luigi</span></li>
-        <li><span class="card-basic-info">Exemple</span><span class="card-basic-result">du text opif</span></li>
+        <li><span class="card-basic-info">Record</span><span class="card-basic-result">World Champ</span></li>
+        <li><span class="card-basic-info">Rival</span><span class="card-basic-result">none</span></li>
+        <li><span class="card-basic-info">Total Gains</span><span class="card-basic-result">1 010 244,90€</span></li>
       </ul>
     </div>
     <!-- <p id="notice"><%= notice %></p>
@@ -32,20 +33,99 @@
   <div class="back">
     <div class="special-gamer-card-back">
       <div class="header-card-back">
-        <h2>@Player.name</h2>
+        <h2>Faker</h2>
       </div>
       <!-- <div class="graph-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcp75b2qfsNwI8zWwuctigcRbin-wMn158USAG4PDmCqMO6vTg7w" alt="">
-      </div> 
+      </div>
       <div class="contact-card">
         <%= link_to 'Follow', root_path %>
       </div> -->
+      <div id="radar-wrapper">
+        <div class="radar-header">
+          <h1><em>STATISTIQUES</em></h1>
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="radar-lower">
+          <button type="button" name="button">follow</button>
+          <p>Cliqué sur <em>Follow me</em> pour etre notifié lors de mes prochaines competitions ou de mes rediffusions en live streaming!!!</p>
+        </div>
+      </div>
     </div>
   </div>
   </div>
 </div>
 
 <style media="screen">
+
+body{
+  font-family: 'Oswald', sans-serif;
+}
+.reseaux-sociaux{
+  position: absolute;
+  top: 70px;
+  left: 0px;
+}
+.reseaux-sociaux ul{
+  margin: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.reseaux-sociaux li{
+  margin-bottom: 10px;
+}
+.reseaux-sociaux img{
+  display: block;
+  margin: 5px;
+}
+#radar-wrapper{
+  background: rgba(233, 233, 233,1);
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+}
+#radar-wrapper h1{
+  background: rgba(177, 67, 104,1);
+}
+#radar-wrapper .radar-header{
+  color: #EEE;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+#radar-wrapper .radar-lower{
+  background: rgba(140, 122, 230,0.1);
+  padding: 10px;
+}
+#radar-wrapper button{
+  background: rgba(206, 251, 95,1);
+  padding: 5px 15px;
+  box-shadow: 0px 0 6px 0;
+  transition: .1s;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #555;
+}
+#radar-wrapper button:hover{
+  box-shadow: 0px 0 0 0;
+}
+#radar-wrapper .radar-lower p{
+  font-weight: 100;
+  text-align: center;
+  padding: 10px;
+}
+@media (min-width: 725px) {
+ #radar-wrapper{
+   display: none;
+ }
+}
+
+
+
+
+
   .special-gamer-card{
     height: 96vh !important;
     width: 100%;
@@ -59,22 +139,14 @@
     color: #FFF;
     padding: 5px;
   }
-  .about-card .player-info{
-    border-bottom: 1px #555 solid;
-  }
   .about-card .player-info li{
     margin: 10px;
-  }
-  .about-card .player-info li img{
-    width: 30px !important;
-    height: 20px !important;
+    display: block;
   }
   .about-card .reseaux-sociaux{
     border-top: 1px #222 solid;
   }
-  .about-card .reseaux-sociaux img{
-    width: 50px;
-  }
+
   .about-card h3{
     padding: 1em 1em 0.3em 1em;
     margin: 0 auto;
@@ -87,49 +159,7 @@
     background-size: cover;
     padding-top: 70px;
   }
-  .special-gamer-card .header-card .follow{
-    top: 70px;
-    border: 2px solid #DDD;
-    border-radius: 35px;
-    padding: 0em 1em;
-    background: #EEE;
-    color: #111;
-    text-decoration: none;
-    position: absolute;
-    top: 70px;
-    right: 5px;
-    box-shadow: inset 0 0 30px rgba(0,0,0,1);
-    overflow: hidden;
-  }
-  .special-gamer-card .header-card .follow:before{
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -10px;
-      width: 70%;
-      height: 100%;
-      background: rgba(255,255,255,.1);
-      transition: .5s;
-      transform: skewX(-15deg);
-  }
-  .special-gamer-card .header-card .follow:hover:before{
-      left: 210px;
-  }
-  .special-gamer-card .header-card .follow:after{
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -70px;
-      width: 50px;
-      height: 100%;
-      background: rgba(255,255,255,.1);
-      transition: .8s;
-      transform: skewX(-15deg);
-      transition-delay: .3s;
-  }
-  .special-gamer-card .header-card .follow:hover:after{
-      left: 210px;
-  }
+
   .special-gamer-card .header-card .gamer-photo-card{
     border-radius: 4px;
     width: 30vh;
@@ -235,7 +265,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-
 }
 
 /* front pane, placed above back */
