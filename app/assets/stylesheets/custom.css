@@ -232,18 +232,9 @@ footer p{
     flex-direction: row;
     text-align: center;
   }
-  body {
-    display: none;
-  }
   .section .article{
     width: 30%;
     border: 1px solid #EEE;
     margin: 10px auto 0 auto;
-  }
-  #mobile-message {
-    color: white;
-    display: show;
-    background: green;
-    padding-top: 200px;
   }
  }

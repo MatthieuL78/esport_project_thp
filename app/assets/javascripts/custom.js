@@ -81,11 +81,12 @@ $(document).on ("turbolinks:load", function(){
 			  }]
 		 },
 
-
 		 // Configuration options go here
 
 		 options: chartOptions
 })
+
+	console.log(myRadarChart);
 
 
 })
